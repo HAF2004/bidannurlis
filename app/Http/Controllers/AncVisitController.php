@@ -25,26 +25,56 @@ class AncVisitController extends Controller
             'tfu_cm' => 'nullable|numeric',
             'refleks_patella' => 'nullable|in:+,-',
             'djj' => 'nullable|integer',
+            'kepala_thd' => 'nullable',
             'presentasi' => 'nullable',
             'jumlah_janin' => 'nullable|integer|min:1',
             'tbj_gram' => 'nullable|integer',
+            'konseling' => 'nullable',
             'status_imunisasi_tt' => 'nullable',
+            'injeksi_tt' => 'nullable|boolean',
             'fe_tablet' => 'nullable|integer',
             'catat_buku_kia' => 'nullable|boolean',
             'pmt_bumil' => 'nullable|boolean',
+            'pmk_bumil_kek' => 'nullable|boolean',
             'kelas_ibu' => 'nullable|boolean',
             'hb' => 'nullable|numeric',
+            'anemia' => 'nullable|in:+,-',
             'gula_darah' => 'nullable',
+            'thalasemia' => 'nullable',
             'protein_urin' => 'nullable',
             'hiv' => 'nullable',
             'sifilis' => 'nullable',
             'hbsag' => 'nullable',
+            'datang_dengan_hiv' => 'nullable|boolean',
+            'ditawarkan_tes_hiv' => 'nullable|boolean',
+            'hasil_hiv' => 'nullable|in:+,-',
+            'mendapatkan_arv' => 'nullable|boolean',
+            'p4hiv_arv' => 'nullable',
+            'p4hiv_profilaksis_anak' => 'nullable',
+            'malaria' => 'nullable',
+            'diberikan_kelambu' => 'nullable|boolean',
+            'hasil_malaria' => 'nullable|in:+,-',
+            'obat_malaria' => 'nullable',
+            'tb' => 'nullable',
+            'hasil_tb' => 'nullable|in:+,-',
+            'obat_tb' => 'nullable',
+            'ankylostoma' => 'nullable|in:+,-',
+            'ims' => 'nullable',
+            'diperiksa_ims' => 'nullable|boolean',
+            'diagnosis_ims' => 'nullable',
+            'penanganan_obat' => 'nullable',
             'komplikasi' => 'nullable',
             'dirujuk_ke' => 'nullable',
             'keadaan_datang' => 'nullable|in:hidup,mati',
             'keadaan_pulang' => 'nullable|in:hidup,mati',
             'keterangan' => 'nullable',
         ]);
+
+        // Fix booleans
+        $booleans = ['injeksi_tt', 'catat_buku_kia', 'pmt_bumil', 'pmk_bumil_kek', 'kelas_ibu', 'datang_dengan_hiv', 'ditawarkan_tes_hiv', 'mendapatkan_arv', 'diberikan_kelambu', 'diperiksa_ims'];
+        foreach ($booleans as $field) {
+            $validated[$field] = $request->has($field) ? true : false;
+        }
 
         $validated['mother_id'] = $mother->id;
         $validated['no_urut'] = $mother->ancVisits()->count() + 1;
@@ -72,15 +102,56 @@ class AncVisitController extends Controller
             'tfu_cm' => 'nullable|numeric',
             'refleks_patella' => 'nullable|in:+,-',
             'djj' => 'nullable|integer',
+            'kepala_thd' => 'nullable',
             'presentasi' => 'nullable',
             'jumlah_janin' => 'nullable|integer|min:1',
             'tbj_gram' => 'nullable|integer',
+            'konseling' => 'nullable',
             'status_imunisasi_tt' => 'nullable',
+            'injeksi_tt' => 'nullable|boolean',
             'fe_tablet' => 'nullable|integer',
+            'catat_buku_kia' => 'nullable|boolean',
+            'pmt_bumil' => 'nullable|boolean',
+            'pmk_bumil_kek' => 'nullable|boolean',
+            'kelas_ibu' => 'nullable|boolean',
             'hb' => 'nullable|numeric',
+            'anemia' => 'nullable|in:+,-',
+            'gula_darah' => 'nullable',
+            'thalasemia' => 'nullable',
+            'protein_urin' => 'nullable',
+            'hiv' => 'nullable',
+            'sifilis' => 'nullable',
+            'hbsag' => 'nullable',
+            'datang_dengan_hiv' => 'nullable|boolean',
+            'ditawarkan_tes_hiv' => 'nullable|boolean',
+            'hasil_hiv' => 'nullable|in:+,-',
+            'mendapatkan_arv' => 'nullable|boolean',
+            'p4hiv_arv' => 'nullable',
+            'p4hiv_profilaksis_anak' => 'nullable',
+            'malaria' => 'nullable',
+            'diberikan_kelambu' => 'nullable|boolean',
+            'hasil_malaria' => 'nullable|in:+,-',
+            'obat_malaria' => 'nullable',
+            'tb' => 'nullable',
+            'hasil_tb' => 'nullable|in:+,-',
+            'obat_tb' => 'nullable',
+            'ankylostoma' => 'nullable|in:+,-',
+            'ims' => 'nullable',
+            'diperiksa_ims' => 'nullable|boolean',
+            'diagnosis_ims' => 'nullable',
+            'penanganan_obat' => 'nullable',
             'komplikasi' => 'nullable',
+            'dirujuk_ke' => 'nullable',
+            'keadaan_datang' => 'nullable|in:hidup,mati',
+            'keadaan_pulang' => 'nullable|in:hidup,mati',
             'keterangan' => 'nullable',
         ]);
+
+        // Fix booleans
+        $booleans = ['injeksi_tt', 'catat_buku_kia', 'pmt_bumil', 'pmk_bumil_kek', 'kelas_ibu', 'datang_dengan_hiv', 'ditawarkan_tes_hiv', 'mendapatkan_arv', 'diberikan_kelambu', 'diperiksa_ims'];
+        foreach ($booleans as $field) {
+            $validated[$field] = $request->has($field) ? true : false;
+        }
 
         $ancVisit->update($validated);
 
