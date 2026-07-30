@@ -12,12 +12,7 @@
                 <span class="me-3"><strong>{{ $stats['antrian_hari_ini'] }}</strong> total</span>
                 <span><strong>{{ $stats['antrian_menunggu'] }}</strong> menunggu</span>
             </div>
-            <div class="d-flex gap-2">
-                <a href="{{ route('antrian.create') }}" class="btn btn-light btn-sm"><i class="bi bi-plus-circle me-1"></i>
-                    Daftar Antrian</a>
-                <a href="{{ route('antrian.index') }}" class="btn btn-outline-light btn-sm"><i class="bi bi-list me-1"></i>
-                    Kelola</a>
-            </div>
+
         </div>
     </div>
 
@@ -219,12 +214,5 @@
         </div>
     </div>
 
-    <div class="mt-4 d-flex gap-2">
-        <a href="{{ route('patients.create') }}" class="btn btn-primary btn-lg">
-            <i class="bi bi-person-plus me-2"></i>Tambah Pasien Baru
-        </a>
-        <a href="{{ route('mothers.create') }}" class="btn btn-outline-primary btn-lg">
-            <i class="bi bi-gender-female me-2"></i>Tambah Data Kehamilan
-        </a>
-    </div>
+
 @endsection
