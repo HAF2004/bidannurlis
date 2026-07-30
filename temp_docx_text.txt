@@ -1,0 +1,675 @@
+PROPOSAL SKRIPSI
+Implementasi Sistem Pendukung Keputusan Berbasis Web untuk Penentuan Prioritas Antrian Pelayanan Pasien Menggunakan Metode Rule-Based dan Time-Based Scheduling
+Oleh :
+Muhammad Idlal Hafizd
+221011403130
+PROGRAM STUDI TEKNIK INFORMATIKA 
+FAKULTAS ILMU KOMPUTER 
+UNIVERSITAS PAMULANG 
+PAMULANG 
+2025
+DAFTAR ISI
+DAFTAR ISI2
+DAFTAR GAMBAR5
+DAFTAR TABEL6
+BAB I PENDAHULUAN7
+1.1 Latar Belakang7
+1.2 Identifikasi Masalah8
+1.3 Rumusan Masalah8
+1.4 Batasan Masalah9
+1.5 Tujuan Penelitian9
+1.6 Manfaat Penelitian10
+1.7 Metode Penelitian10
+1.8 Sistematika Penulisan12
+BAB II LANDASAN TEORI14
+2.1 Penelitian Terkait14
+2.2 Tinjauan Pustaka17
+2.2.1 Sistem Pendukung Keputusan (SPK)17
+2.2.2 Rule-Based Reasoning (RBR)18
+2.2.3 Konsep Prioritas Pelayanan dan Triase pada Layanan Kebidanan18
+2.2.4 Time-Based Scheduling (Penjadwalan Berbasis Waktu)18
+2.2.5 Sistem Antrian Berbasis Web19
+2.2.6 Integrasi Rule-Based Reasoning dan Time-Based Scheduling dalam Sistem19
+2.2.7 Visual Studio Code19
+2.2.8 PHP19
+2.2.9 Laravel20
+2.2.10 Composer20
+2.2.11 MySQL20
+2.2.12 XAMPP21
+2.2.13 phpMyAdmin21
+2.2.14 HTML, CSS, dan JavaScript21
+2.2.15 Web Browser22
+2.2.16 Draw.io22
+2.2.17 Pengujian Sistem22
+2.3 Kerangka Berpikir23
+BAB III ANALISA DAN PERANCANGAN25
+3.1 Analisa Sistem25
+3.1.1 Analisa Sistem Berjalan25
+3.1.2 Analisa Sistem Usulan26
+3.2 Perancangan Basis Data27
+3.2.1 Entity Relationship Diagram (ERD)28
+3.2.2 Transformasi ERD ke Logical Record Structure (LRS)28
+3.2.3 Logical Record Structure (LRS)29
+3.2.4 Normalisasi30
+3.2.5 Spesifikasi Tabel Users31
+3.3 Perancangan Unified Modelling Language (UML)35
+3.3.1 Use Case Diagram35
+3.3.2 Activity Diagram36
+3.3.3 Sequence Diagram37
+3.3.4 Class Diagram38
+3.4 User Interface39
+3.4.1 Rancangan Halaman Login40
+3.4.2 Rancangan Halaman Dashboard Utama41
+3.4.3 Rancangan Form Input Pendaftaran & Gejala42
+3.4.4 Rancangan Tampilan Monitor Antrian43
+DAFTAR PUSTAKA44
+DAFTAR GAMBAR
+Gambar 2.1 Kerangka Berpikir24
+Gambar 3.1 Analisa Sistem Berjalan25
+Gambar 3. 2 Analisa Sistem Usulan27
+Gambar 3.3 Entity Relationship Diagram28
+Gambar 3.4 Transformasi ERD ke LRS29
+Gambar 3.5 Logical Record Structture (LRS)29
+Gambar 3. 6 Use Case Diagram35
+Gambar 3. 7 Activity Diagram Penentuan Prioritas37
+Gambar 3. 8 Sequence Diagram Proses Pendaftaran38
+Gambar 3. 9 Class Diagram39
+Gambar 3. 10 Rancangan Halaman Login40
+Gambar 3. 11 Rancangan Dashboard Bidan41
+Gambar 3. 12 Rancangan Form Input Pasien42
+Gambar 3. 13 Rancangan Monitor Antrian43
+DAFTAR TABEL
+Tabel 3.1 Analisa Sistem Susulan26
+Tabel 3.2 Tabel Normalisasi30
+Tabel 3. 3 Spesifikasi Tabel Pasien31
+Tabel 3.4 Kamus Data Tabel prioritas32
+Tabel 3. 5 Data Default Prioritas32
+Tabel 3. 6 Kamus Data Tabel antrian33
+Tabel 3. 7 Kamus Data Tabel pengaturan34
+Tabel 3. 8 Data Default Pengaturan34
+Tabel 3. 9 Relasi Antar Tabel34
+Tabel 3. 10 Skenario Use Case Pendaftaran Pasien35
+Tabel 3. 11 Skenario Use Case Pilih Prioritas36
+BAB IPENDAHULUAN
+1.1 Latar Belakang
+Praktik Mandiri Bidan (PMB) merupakan fasilitas pelayanan kesehatan primer yang memiliki peran strategis dalam menjaga kesehatan ibu dan anak. Kualitas pelayanan di PMB seringkali dinilai dari aspek ketanggapan (responsiveness) dan efisiensi waktu tunggu. Penelitian oleh Sari (2021) menegaskan bahwa manajemen waktu yang baik dan pelayanan yang responsif berbanding lurus dengan tingkat kepuasan pasien. Namun, kondisi ideal tersebut belum sepenuhnya terwujud di Praktik Bidan Nurlis dikarenakan beberapa kendala klinis dan administratif.
+Berdasarkan observasi awal, sistem pengelolaan antrian di Praktik Bidan Nurlis saat ini masih dijalankan secara konvensional menggunakan buku tulis. Proses pendaftaran mengharuskan pasien untuk datang langsung (on-site). Selain itu, dalam pelayanannya, praktik ini menerapkan prinsip First Come First Served (FCFS) tanpa adanya mekanisme triase atau pemilahan keluhan pasien terlebih dahulu. Bidan juga belum memiliki alat bantu (tools) pengambilan keputusan yang dapat membantu mereka menentukan prioritas penanganan secara cepat dan objektif.
+Kondisi tersebut menimbulkan berbagai masalah yang menghambat pelayanan prima. Secara administratif, pencatatan manual sangat rentan terhadap kesalahan, menyulitkan dan memperlama pencarian data riwayat pasien (retrieval), serta memicu terjadinya penumpukan antrian fisik di ruang tunggu. Secara klinis, ketiadaan mekanisme triase mengancam keselamatan ibu dan janin; pasien dengan kondisi gawat darurat (seperti pendarahan atau tanda bahaya kehamilan lainnya) seringkali harus menunggu lama untuk mendapatkan penanganan akibat antrian yang tertutup oleh pasien dengan keluhan ringan.
+Solusi teknologi informasi berbasis web telah banyak diusulkan untuk mengatasi permasalahan administrasi kebidanan, sebagaimana diimplementasikan oleh Nuryani dkk. (2024) dan Ramadan dkk. (2022). Namun, sistem-sistem tersebut umumnya hanya berfokus pada digitalisasi administratif semata. Untuk mengatasi kompleksitas masalah di Praktik Bidan Nurlis, dibutuhkan sebuah sistem informasi yang saling terintegrasi dan lebih "cerdas". Sistem tersebut tidak hanya harus dapat mengelola registrasi dan meminimalisir antrian fisik antar pasien, tetapi juga mampu bertindak sebagai sistem pendukung keputusan yang membantu bidan dalam memfasilitasi triase klinis secara otomatis.
+Oleh karena itu, penelitian ini mengusulkan pengembangan Sistem Informasi Manajemen Antrian dan Rekam Medis (SIMANTRI) yang mengintegrasikan metode cerdas untuk menyelesaikan permasalahan tersebut. Sistem yang dibangun akan menerapkan algoritma Rule-Based Reasoning (RBR) untuk mengevaluasi keluhan dan secara objektif menentukan prioritas penanganan klinis, serta metode Time-Based Scheduling (TBS) untuk memberikan estimasi waktu layanan yang dinamis kepada pasien. Dengan integrasi kedua metode ini, diharapkan PMB dapat memberikan pelayanan yang jauh lebih efisien, responsif, dan mengutamakan keselamatan pasien gawat darurat tanpa mengabaikan aspek administratif.
+1.2 Identifikasi Masalah
+Berdasarkan latar belakang di atas, permasalahan yang dapat diidentifikasi adalah sebagai berikut:
+Sistem pengelolaan antrian di Praktik Bidan Nurlis masih dilakukan secara manual (pencatatan buku), sehingga proses administrasi menjadi lambat, rentan kesalahan data, dan mengharuskan pasien datang langsung untuk mendaftar.
+Penerapan sistem antrian konvensional (siapa datang duluan dilayani) menyebabkan pasien dengan kondisi gawat darurat berisiko terlambat mendapatkan penanganan medis.
+Bidan belum memiliki alat bantu (decision support tool) yang objektif untuk menentukan status prioritas pasien secara konsisten berdasarkan gejala klinis yang dialami.
+Pasien tidak mendapatkan informasi yang jelas mengenai estimasi waktu tunggu, yang seringkali memicu kecemasan dan ketidaknyamanan di ruang tunggu.
+1.3 Rumusan Masalah
+Berdasarkan identifikasi masalah tersebut, rumusan masalah dalam penelitian ini adalah:
+Bagaimana merancang dan membangun Sistem Informasi Manajemen Antrian dan Rekam Medis (SIMANTRI) berbasis web di Praktik Bidan Nurlis?
+Bagaimana mengintegrasikan metode Rule-Based Reasoning (RBR) ke dalam sistem untuk menentukan prioritas pelayanan pasien berdasarkan tingkat kegawatdaruratan klinis ?
+Bagaimana mengimplementasikan algoritma Time-Based Scheduling (TBS) pada sistem antrian untuk menghitung dan menampilkan estimasi waktu layanan yang transparan bagi pasien ?
+Bagaimana tingkat penerimaan dan efektivitas sistem yang dibangun dalam membantu bidan mengambil keputusan triase serta mengurai antrian fisik di ruang tunggu ?
+1.4 Batasan Masalah 
+Agar penelitian ini lebih terarah dan tidak meluas dari tujuan utama, maka perlu ditetapkan beberapa batasan masalah sebagai berikut:
+ Penelitian dan implementasi sistem pendukung keputusan antrian ini hanya dilakukan secara spesifik pada satu lokasi observasi, yaitu di Praktik Bidan Nurlis, sehingga hasil aturan prioritas (rules) disesuaikan khusus dengan SOP di fasilitas tersebut.
+ Data pasien yang dikelola dalam sistem difokuskan pada pelayanan kebidanan dasar yang tersedia di praktik tersebut (seperti pemeriksaan kehamilan/KIA, KB, imunisasi, dan persalinan normal), tidak mencakup seluruh layanan rumah sakit tingkat lanjut.
+Penentuan prioritas kegawatdaruratan dan penjadwalan antrian murni didasarkan pada metode Rule-Based Reasoning (RBR) dengan 3 klasifikasi (Gawat/Merah, Mendesak/Kuning, Biasa/Hijau) dan Time-Based Scheduling (TBS) untuk estimasi waktu layanan. Penelitian ini tidak membandingkan atau mengkombinasikan metode algoritma kecerdasan buatan (AI/Machine Learning) lainnya.
+Sistem ini dirancang sebatas sebagai alat pendukung keputusan (decision support) untuk proses triase antrian administratif berdasarkan keluhan awal/gejala (symptom). Sistem ini tidak menggantikan wewenang bidan atau dokter dalam menegakkan diagnosis medis secara klinis maupun menentukan tindakan medis lanjutan.
+Pengujian sistem dilakukan dengan Black Box Testing untuk fungsionalitas dan UAT (User Acceptance Test) untuk pengguna.
+1.5 Tujuan Penelitian 
+Sejalan dengan rumusan masalah, tujuan penelitian ini adalah:
+Menghasilkan rancang bangun Sistem Informasi Manajemen Antrian dan Rekam Medis (SIMANTRI) berbasis web di Praktik Bidan Nurlis.
+Menerapkan metode Rule-Based Reasoning (RBR) ke dalam sistem sebagai pendukung keputusan (decision support) untuk memprioritaskan pasien secara otomatis berdasarkan gejala medis.
+Menerapkan algoritma Time-Based Scheduling (TBS) untuk memberikan estimasi jadwal dan waktu tunggu yang dinamis bagi pasien.
+Mengetahui tingkat penerimaan pengguna (bidan, admin, dan pasien) terhadap sistem yang dibangun melalui pengujian Black Box dan User Acceptance Test (UAT).
+1.6 Manfaat Penelitian 
+Berdasarkan tujuan yang ingin dicapai, maka penelitian ini diharapkan dapat memberikan manfaat baik secara langsung maupun tidak langsung, antara lain:
+Bagi Praktik Bidan Nurlis
+Meningkatkan efisiensi operasional melalui digitalisasi administrasi. Risiko kesalahan pencatatan manual dapat diminimalisir, dan laporan kunjungan pasien dapat dihasilkan secara otomatis.
+Bagi Bidan dan Petugas Administrasi
+Berfungsi sebagai asisten cerdas yang mengurangi beban kognitif dalam memilah pasien. Bidan dapat fokus pada tindakan medis karena sistem telah membantu menyaring pasien mana yang membutuhkan penanganan prioritas.
+Bagi Pasien
+Meningkatkan keselamatan pasien gawat darurat melalui jalur prioritas (fast track) dan memberikan kenyamanan bagi pasien umum melalui kepastian estimasi waktu tunggu.
+Bagi Akademisi
+Menambah referensi mengenai implementasi hibrida metode RBR dan TBS pada sistem informasi kesehatan tingkat primer.
+1.7 Metode Penelitian 
+Penelitian ini menggunakan pendekatan rekayasa perangkat lunak (software engineering) dengan fokus pada perancangan dan pengembangan Sistem Pendukung Keputusan (SPK) berbasis web untuk penentuan prioritas pelayanan pasien di Praktik Bidan Nurlis. Pendekatan ini dipilih karena mampu mengintegrasikan proses analisis kebutuhan, perancangan sistem, implementasi logika pengambilan keputusan berbasis Rule-Based Reasoning dan Time-Based Scheduling, serta pengujian sistem secara terstruktur dan terukur. Adapun tahapan metodologi yang digunakan dalam penelitian ini adalah sebagai berikut:
+Studi Literatur
+Mengumpulkan referensi dari jurnal ilmiah, buku, skripsi, dan sumber akademik lain yang relevan mengenai Sistem Pendukung Keputusan, pelayanan kebidanan, triase, sistem antrian, Rule-Based Reasoning, dan Time-Based Scheduling. Studi literatur ini bertujuan untuk memperoleh landasan teori, mengetahui hasil penelitian terdahulu, serta memastikan bahwa konsep dan metode yang digunakan sejalan dengan perkembangan ilmu pengetahuan di bidang terkait.
+Identifikasi Kebutuhan dan Analisis Sistem
+Dilakukan melalui observasi alur pelayanan dan wawancara dengan bidan serta petugas administrasi di Praktik Bidan Nurlis untuk memetakan proses bisnis, permasalahan yang muncul, dan kebutuhan sistem. Pada tahap ini diidentifikasi bagaimana mekanisme antrian manual berjalan saat ini, bagaimana penentuan prioritas pasien dilakukan, serta fitur-fitur apa saja yang diharapkan ada pada sistem pendukung keputusan yang akan dikembangkan.
+Perancangan Sistem
+Mendesain Sistem Pendukung Keputusan berbasis web dengan menyusun use case diagram, activity diagram, diagram kelas, dan ERD (Entity Relationship Diagram), serta rancangan antarmuka (user interface). Pada tahap ini juga dirancang logika penerapan metode Rule-Based Reasoning untuk penentuan kategori prioritas pasien (misalnya gawat darurat, mendesak, kurang mendesak, tidak gawat) dan Time-Based Scheduling untuk pengaturan urutan antrian dan estimasi waktu tunggu berdasarkan jenis layanan dan durasi pelayanan.
+Pengembangan Sistem
+Mengimplementasikan sistem berbasis web menggunakan bahasa pemrograman dan framework yang sesuai, seperti PHP (Laravel) dan MySQL sebagai basis data. Pada tahap ini, rancangan yang telah dibuat diubah menjadi kode program, termasuk implementasi modul SPK yang mengintegrasikan aturan-aturan Rule-Based Reasoning dan mekanisme Time-Based Scheduling dalam proses penentuan prioritas dan penyusunan antrian pasien.
+Pengujian Sistem
+Melakukan pengujian sistem dengan menggunakan metode black-box testing untuk memastikan bahwa seluruh fitur dan fungsi sistem berjalan dengan baik sesuai kebutuhan pengguna. Pengujian dilakukan pada modul input data pasien, penentuan prioritas, penyusunan antrian, tampilan estimasi waktu tunggu, serta laporan yang dihasilkan sistem. Pengujian ini juga mencakup verifikasi apakah rekomendasi prioritas dan antrian yang dihasilkan sistem sudah sesuai dengan aturan yang ditetapkan bersama bidan.
+Evaluasi Sistem
+Mengevaluasi kinerja dan penerimaan sistem dengan melibatkan bidan dan petugas administrasi sebagai pengguna. Evaluasi dilakukan dengan cara meminta pengguna mencoba sistem, kemudian mengisi kuesioner atau memberikan umpan balik terkait kemudahan penggunaan, kejelasan informasi, kesesuaian dengan alur kerja, serta manfaat sistem dalam membantu pengelolaan prioritas dan antrian pasien. Hasil evaluasi digunakan untuk mengetahui sejauh mana sistem mendukung proses pengambilan keputusan di Praktik Bidan Nurlis dan untuk menentukan perbaikan yang diperlukan.
+Dokumentasi
+Menyusun dokumentasi penelitian yang mencakup seluruh tahapan, mulai dari studi literatur, analisis kebutuhan, perancangan, pengembangan, pengujian, hingga evaluasi sistem. Dokumentasi ini disajikan dalam bentuk laporan proposal skripsi dan skripsi akhir, serta dapat dijadikan referensi bagi pengembangan sistem pendukung keputusan sejenis di masa mendatang.
+1.8 Sistematika Penulisan
+Sistematika penulisan proposal skripsi ini adalah sebagai berikut:
+BAB I
+PENDAHULUAN
+Bab ini berisi latar belakang penelitian, identifikasi masalah, rumusan masalah, batasan masalah, tujuan penelitian, manfaat penelitian, metode penelitian, dan sistematika penulisan. Bagian ini menjelaskan secara umum dasar pemikiran, arah, serta tujuan dari penelitian yang dilakukan, khususnya terkait kebutuhan pengembangan Sistem Pendukung Keputusan berbasis web untuk penentuan prioritas pelayanan pasien di Praktik Bidan Nurlis.
+BAB II
+LANDASAN TEORI
+Bab ini membahas teori-teori dan konsep yang mendukung penelitian, meliputi pembahasan mengenai Sistem Pendukung Keputusan (Decision Support System), konsep pelayanan kebidanan dan triase, teori mengenai Rule-Based Reasoning dan Time-Based Scheduling, sistem antrian pada pelayanan kesehatan, serta penelitian-penelitian terdahulu yang relevan sebagai dasar pengembangan sistem. Landasan teori ini digunakan untuk membangun kerangka berpikir dan memperkuat argumentasi perlunya sistem yang diusulkan.
+BAB III
+ANALISIS DAN PERANCANGAN SISTEM
+Bab ini menguraikan hasil analisis kebutuhan sistem, baik kebutuhan fungsional maupun nonfungsional, berdasarkan kondisi nyata di Praktik Bidan Nurlis. Selain itu, bab ini juga menjelaskan perancangan sistem yang meliputi pemodelan proses bisnis, use case diagram, activity diagram, diagram kelas, Entity Relationship Diagram (ERD), serta desain antarmuka pengguna (user interface). Pada bab ini juga dijelaskan alur logika penerapan metode Rule-Based Reasoning dan Time-Based Scheduling dalam sistem untuk menghasilkan rekomendasi prioritas pelayanan dan pengaturan antrian pasien.
+BAB IILANDASAN TEORI
+2.1 Penelitian Terkait 
+Laila dkk. (2024)
+Penelitian yang dilakukan oleh Laila, Safaringga, Iffah, Suryafma, Wulandari, dan Novelin (2024) berjudul “Analisis Tingkat Kepuasan Pasien Terhadap Pelayanan Antenatal Care di Praktek Mandiri Bidan Delima Sumatera Barat”. Penelitian ini bertujuan menganalisis tingkat kepuasan pasien terhadap layanan antenatal care (ANC) pada praktik mandiri bidan. Metode yang digunakan adalah mix method (sequential explanatory) dengan pengumpulan data melalui kuesioner serta pendalaman melalui wawancara. Hasil penelitian menunjukkan bahwa mayoritas responden berada pada kategori sangat puas terhadap pelayanan ANC, sehingga kepuasan dipandang mencerminkan mutu pelayanan yang baik (Laila dkk., 2024, hlm. 359).
+Relevansi penelitian ini dengan penelitian di Praktik Bidan Nurlis terletak pada kesamaan konteks layanan kebidanan (praktik mandiri) dan pentingnya mutu proses pelayanan terhadap pengalaman pasien. Perbedaannya, penelitian Laila dkk. berfokus pada pengukuran kepuasan, sedangkan penelitian penulis berfokus pada perancangan sistem (SPK) untuk membantu penentuan prioritas pelayanan dan pengelolaan antrian agar proses layanan lebih tertib dan adaptif.
+Noorzaman dan Ramadhan (2025)
+Penelitian yang dilakukan oleh Noorzaman dan Ramadhan (2025) berjudul “Analisis Kualitas Pelayanan Terhadap Kepuasan Pasien di Praktik Bidan Mandiri (Studi Kasus: Bidan Hj. Iim Maryati, Batujajar, Bandung Barat)”. Penelitian ini menelaah persepsi pasien terhadap kualitas pelayanan berdasarkan lima dimensi SERVQUAL (tangibles, reliability, responsiveness, assurance, dan empathy). Metode yang digunakan adalah kualitatif dengan studi kasus, melalui wawancara mendalam, observasi, dan dokumentasi. Hasil penelitian menunjukkan bahwa kepuasan pasien dipengaruhi oleh pengalaman pelayanan, termasuk komunikasi interpersonal, kenyamanan emosional, serta empati tenaga kesehatan (Noorzaman & Ramadhan, 2025, hlm. 252).
+Relevansi penelitian ini dengan penelitian penulis terletak pada fokus peningkatan kualitas layanan pada praktik bidan mandiri. Perbedaannya, penelitian Noorzaman dan Ramadhan memotret kualitas layanan dari sudut pengalaman pasien, sedangkan penelitian penulis menawarkan intervensi sistem berupa SPK yang membantu bidan menata prioritas pelayanan dan antrian secara lebih sistematis untuk mendukung pengalaman layanan yang konsisten. 
+Poerwandono dkk. (2024)
+Penelitian yang dilakukan oleh Poerwandono, Anwar, Mutia, dan Damayanti (2024) berjudul “Implementasi Sistem Antrian Pasien Berbasis Website Pada Klinik Sehat Tamba Kelurahan Cilangkap”. Penelitian ini bertujuan menerapkan sistem antrian pasien berbasis website agar pasien dapat memperoleh nomor antrian secara online, sehingga proses layanan menjadi lebih tertib dan efisien. Hasil penelitian menyatakan bahwa penerapan sistem antrian berbasis web memudahkan pasien memperoleh nomor antrian serta membantu meningkatkan efisiensi pelayanan (Poerwandono dkk., 2024, hlm. 346–347).
+Relevansi penelitian ini dengan penelitian penulis adalah kesamaan pemanfaatan sistem berbasis web untuk menata alur layanan dan mengurangi ketidakpastian antrian. Perbedaannya, penelitian Poerwandono dkk. berfokus pada mekanisme antrian umum (pengambilan nomor antrian/monitoring), sedangkan penelitian penulis menambahkan modul SPK berbasis aturan untuk menentukan prioritas (urgensi) sehingga urutan pelayanan tidak hanya mengikuti urutan datang.
+Nashrulloh dan Sopian (2025)
+Penelitian yang dilakukan oleh Nashrulloh dan Sopian (2025) berjudul “Design and Build a Website-Based Queue Booking Information System at Bunda Alya Clinic Using the Rational Unified Process Methodology”. Penelitian ini membangun sistem booking antrian berbasis web untuk mengatasi pendaftaran manual, di mana pasien sebelumnya harus datang langsung untuk memperoleh nomor antrian. Metode pengembangan menggunakan Rational Unified Process (RUP) dengan pemodelan UML. Hasil penelitian menyatakan sistem booking antrian dapat meningkatkan efisiensi layanan, mengurangi waktu tunggu pasien, dan meningkatkan aksesibilitas pendaftaran (Nashrulloh & Sopian, 2025, hlm. 1).
+Relevansi penelitian ini dengan penelitian penulis terletak pada kesamaan tujuan pengelolaan antrian layanan kesehatan berbasis web. Perbedaannya, Nashrulloh dan Sopian menitikberatkan pada booking antrian dan alur pendaftaran, sedangkan penelitian penulis menambahkan pengambilan keputusan prioritas menggunakan Rule-Based Reasoning dan pengaturan slot/waktu layanan menggunakan Time-Based Scheduling agar pelayanan lebih adaptif terhadap tingkat urgensi pasien.
+Kassa dkk. (2025)
+Penelitian Kassa, Dadi, dan Bizuayehu (2025) berjudul “Implementation, effectiveness, and barriers of obstetric triage in reducing waiting time: a scoping review”. Penelitian ini meninjau bukti terkait implementasi triase obstetri, efektivitasnya, serta hambatan penerapannya, khususnya dalam konteks pengurangan waktu tunggu dan keterlambatan mendapatkan pelayanan. Temuan kajian menunjukkan bahwa triase obstetri digunakan untuk mengidentifikasi tingkat urgensi sehingga pasien yang membutuhkan perhatian segera dapat diprioritaskan, serta berpotensi membantu menurunkan keterlambatan layanan pada kondisi tertentu (Kassa dkk., 2025, hlm. 1–2).
+Relevansi penelitian ini dengan penelitian penulis adalah kesamaan prinsip pengelolaan urgensi (prioritas) pada layanan maternal. Perbedaannya, kajian Kassa dkk. menyoroti konsep triase dan implementasinya secara umum, sedangkan penelitian penulis mengimplementasikan prinsip prioritas tersebut ke dalam SPK berbasis web menggunakan Rule-Based Reasoning untuk klasifikasi prioritas dan Time-Based Scheduling untuk pengaturan antrian/slot layanan.
+2.2 Tinjauan Pustaka 
+2.2.1 Sistem Pendukung Keputusan (SPK)
+Menurut Hak dkk. (2022), sistem pendukung keputusan dalam layanan kesehatan sering diwujudkan sebagai clinical decision support system (CDSS) yang membantu pengambil keputusan melalui pengolahan data dan representasi pengetahuan untuk menghasilkan rekomendasi. Dalam konteks implementasi, pendekatan berbasis aturan (rule-based) merupakan salah satu yang banyak digunakan karena logikanya lebih mudah ditelusuri dan mendukung konsistensi keputusan (Hak dkk., 2022, hlm. 1).
+Dalam penelitian ini, SPK digunakan untuk membantu bidan menentukan prioritas pelayanan pasien secara lebih konsisten, sehingga keputusan prioritas tidak semata-mata bergantung pada intuisi atau urutan kedatangan, tetapi mengikuti kriteria yang ditetapkan.
+2.2.2 Rule-Based Reasoning (RBR)
+Menurut Vidiadivani dkk. (2024), Rule-Based Reasoning (RBR) adalah metode penalaran yang menggunakan basis pengetahuan berupa serangkaian aturan if-then (jika-maka) untuk memecahkan masalah. Dalam metode ini, keputusan diambil berdasarkan fakta-fakta yang cocok dengan premis aturan yang telah didefinisikan sebelumnya, sehingga menghasilkan solusi yang konsisten dan logis.
+2.2.3 Konsep Prioritas Pelayanan dan Triase pada Layanan Kebidanan
+Menurut Kassa dkk. (2025), triase obstetri digunakan untuk mengidentifikasi tingkat urgensi agar pasien yang membutuhkan perhatian segera dapat ditangani lebih cepat, serta mendukung pengurangan keterlambatan layanan pada kondisi tertentu (Kassa dkk., 2025, hlm. 1–2).
+Pada penelitian ini, konsep prioritas pelayanan diadaptasi sebagai logika penentuan urutan layanan pasien di Praktik Bidan Nurlis. Penentuan prioritas diformalkan ke dalam aturan (RBR) agar keputusan prioritas lebih konsisten dan dapat dipertanggungjawabkan.
+2.2.4 Time-Based Scheduling (Penjadwalan Berbasis Waktu)
+Menurut Feng dkk. (2024), appointment scheduling melibatkan penentuan urutan pasien dan alokasi slot waktu bagi masing-masing pasien untuk menyesuaikan kebutuhan layanan dengan kapasitas penyedia layanan (Feng dkk., 2024, hlm. 1).
+Dalam penelitian ini, Time-Based Scheduling digunakan setelah prioritas pasien ditetapkan oleh RBR, yaitu untuk menyusun urutan pelayanan dan/atau slot waktu layanan agar pasien prioritas tinggi memperoleh penanganan lebih awal, sementara pasien non-urgensi tetap terjadwal dengan tertib sehingga mengurangi penumpukan.
+2.2.5 Sistem Antrian Berbasis Web
+Menurut Poerwandono dkk. (2024), sistem antrian berbasis website memudahkan pasien memperoleh nomor antrian tanpa harus datang lebih awal hanya untuk mendaftar, sehingga waktu pasien lebih efisien dan pengalaman layanan lebih nyaman (Poerwandono dkk., 2024, hlm. 346–347). Dalam penelitian ini, sistem berbasis web digunakan sebagai media implementasi agar proses pendaftaran, penentuan prioritas, dan pengaturan antrean dapat diakses serta dikelola lebih cepat oleh petugas. 
+2.2.6 Integrasi Rule-Based Reasoning dan Time-Based Scheduling dalam Sistem
+Dalam penelitian ini, RBR digunakan untuk menghasilkan keputusan prioritas berdasarkan kriteria/aturan yang ditetapkan. Selanjutnya, Time-Based Scheduling digunakan untuk menyusun layanan berbasis waktu dengan mempertimbangkan prioritas tersebut, sehingga sistem tidak hanya “mencatat antrian”, tetapi juga membantu menata urutan layanan yang lebih adaptif terhadap tingkat urgensi pasien. 
+2.2.7 Visual Studio Code
+Menurut Alfar (2024), Visual Studio Code adalah perangkat lunak penyunting kode (code editor) yang ringan dan andal, mendukung berbagai bahasa pemrograman seperti HTML, CSS, dan JavaScript, serta memiliki fitur ekstensi yang memudahkan proses pengembangan aplikasi web.
+2.2.8 PHP 
+PHP merupakan bahasa pemrograman sisi server (server-side scripting) yang umum digunakan untuk membangun halaman web dinamis dan memproses logika aplikasi pada server. Dalam penelitian ini, PHP digunakan untuk mengimplementasikan logika sistem, khususnya pemrosesan data pasien, penerapan aturan (rule-based) untuk penentuan prioritas pelayanan, serta integrasi dengan basis data untuk menghasilkan keluaran berupa daftar prioritas dan jadwal antrian yang dapat ditampilkan melalui antarmuka web.
+2.2.9 Laravel 
+Menurut Seliwati dan Nugroho (2025), Laravel merupakan framework PHP bersifat open-source yang mendukung pengembangan aplikasi web dengan arsitektur Model-View-Controller (MVC), sehingga memisahkan logika aplikasi, tampilan, dan pengelolaan data agar lebih terstruktur (Seliwati & Nugroho, 2025, hlm. 98). Dalam penelitian ini, Laravel digunakan untuk mempercepat pengembangan sistem berbasis web melalui penerapan struktur MVC, pengelolaan routing, validasi input, dan pengorganisasian modul-modul sistem (misalnya modul pendaftaran, modul penentuan prioritas berbasis aturan, serta modul penjadwalan/antrian berbasis waktu).
+2.2.10 Composer 
+Composer adalah alat manajemen dependensi (dependency manager) standar untuk PHP yang berfungsi mengelola pustaka (library) eksternal dan dependensi proyek secara otomatis melalui file konfigurasi composer.json. Dalam penelitian ini, Composer digunakan sebagai fondasi utama untuk menginstal dan memperbarui framework Laravel beserta seluruh paket pendukungnya, memastikan kompatibilitas antar komponen sistem, serta menjaga struktur kode tetap rapi dan konsisten sesuai standar pengembangan modern.
+2.2.11 MySQL
+Menurut Putri dkk. (2022), MySQL merupakan perangkat lunak basis data relasional open-source yang mengelola data dalam bentuk tabel dan mendukung pengolahan menggunakan bahasa SQL (Putri dkk., 2022, hlm. 345). Dalam penelitian ini, MySQL digunakan sebagai media penyimpanan terpusat untuk data pasien, data kunjungan, data aturan prioritas (rule), parameter layanan, serta hasil keputusan prioritas dan antrian, sehingga proses pencarian, pembaruan, dan pelaporan data dapat dilakukan lebih cepat dan konsisten.
+2.2.12 XAMPP
+Menurut Shidqia dkk. (2025), XAMPP merupakan paket perangkat lunak yang menggabungkan komponen server seperti Apache, PHP, dan MySQL untuk memudahkan instalasi dan menjalankan lingkungan pengembangan web secara lokal (Shidqia dkk., 2025, hlm. 43). Dalam penelitian ini, XAMPP digunakan sebagai server lokal (localhost) untuk menjalankan aplikasi berbasis web selama tahap pengembangan dan pengujian, sehingga sistem dapat diuji secara bertahap sebelum diterapkan pada lingkungan operasional Praktik Bidan Nurlis.
+2.2.13 phpMyAdmin
+Menurut Putri dkk. (2022), phpMyAdmin merupakan aplikasi berbasis web yang menyediakan fitur pengendalian/administrasi MySQL sehingga pengguna dapat melakukan pengelolaan basis data melalui antarmuka menu tanpa harus selalu menulis perintah SQL secara manual (Putri dkk., 2022, hlm. 345). Dalam penelitian ini, phpMyAdmin digunakan untuk pembuatan database, perancangan tabel, pengelolaan relasi data, serta proses administrasi data (misalnya impor/ekspor, pembaruan struktur tabel, dan verifikasi data) yang mendukung kebutuhan modul SPK dan modul antrian.
+2.2.14 HTML, CSS, dan JavaScript
+HTML (HyperText Markup Language) digunakan untuk menyusun struktur halaman aplikasi web, CSS digunakan untuk mengatur tampilan (layout dan visual), sedangkan JavaScript digunakan untuk meningkatkan interaktivitas halaman pada sisi klien (client-side), seperti validasi input sederhana, manipulasi tampilan, dan respons antarmuka. Dalam penelitian ini, HTML, CSS, dan JavaScript digunakan untuk membangun antarmuka sistem yang memudahkan pengguna (admin/bidan) dalam melakukan pendaftaran pasien, melihat hasil prioritas pelayanan, serta memantau urutan dan status antrian secara lebih jelas dan terstruktur.
+2.2.15 Web Browser
+Web browser merupakan perangkat lunak yang bertugas menerjemahkan kode pemrograman web menjadi tampilan grafis yang interaktif bagi pengguna. Dalam penelitian ini, Google Chrome digunakan sebagai media utama untuk menjalankan dan menguji sistem, dipilih karena memiliki fitur Developer Tools yang lengkap untuk memfasilitasi proses debugging, inspeksi elemen antarmuka, serta pengujian responsivitas (responsive design) guna memastikan sistem berjalan optimal di berbagai ukuran layar.
+2.2.16 Draw.io
+Menurut Rasyade dan Voutama (2025), pemodelan sistem dapat digambarkan menggunakan pendekatan UML dengan bantuan draw.io agar alur sistem dapat divisualisasikan secara terstruktur (Rasyade & Voutama, 2025, hlm. 44). Dalam penelitian ini, draw.io digunakan untuk membuat diagram UML seperti use case diagram, activity diagram, sequence diagram, dan class diagram yang menjelaskan kebutuhan fungsional sistem, alur proses prioritas pelayanan berbasis aturan, serta alur penjadwalan/antrian berbasis waktu.
+2.2.17 Pengujian Sistem
+Menurut Frayudha dkk. (2024), pengujian black-box testing berfokus pada pemeriksaan fungsi dan antarmuka aplikasi berdasarkan masukan dan keluaran yang dihasilkan tanpa menilai struktur kode sumber (Frayudha dkk., 2024, hlm. 136). Dalam penelitian ini, pengujian sistem dilakukan menggunakan black-box testing untuk memastikan setiap fungsi berjalan sesuai kebutuhan, termasuk: 
+fungsi pendaftaran dan pengelolaan data pasien.
+fungsi penentuan prioritas berbasis aturan (rule-based).
+fungsi pembentukan urutan/jadwal antrian berbasis waktu (time-based scheduling).
+fungsi laporan dan tampilan informasi hasil keputusan prioritas dan antrian.
+2.3 Kerangka Berpikir 
+Kerangka berpikir dalam penelitian ini disusun berdasarkan permasalahan nyata yang terjadi pada pelayanan pasien di Praktik Bidan Nurlis. Saat ini, sistem pelayanan masih dilakukan secara konvensional, di mana pencatatan data pasien dilakukan secara manual pada buku tulis. Selain itu, mekanisme antrian yang diterapkan menggunakan prinsip First Come First Served (FCFS), yaitu pasien yang datang lebih awal akan dilayani terlebih dahulu tanpa mempertimbangkan tingkat urgensi atau kegawatdaruratan medis yang dialami.
+Kondisi tersebut menimbulkan risiko bagi pasien dengan kondisi gawat darurat (seperti pendarahan atau tanda bahaya kehamilan) yang harus menunggu lama karena tertutup oleh antrian pasien dengan keluhan ringan. Selain risiko medis, ketidakpastian waktu tunggu juga menjadi keluhan utama karena pasien tidak mengetahui estimasi kapan mereka akan mendapatkan pelayanan.
+Untuk mengatasi permasalahan tersebut, dibutuhkan sebuah solusi berupa Sistem Pendukung Keputusan (SPK) berbasis web. Sistem ini dirancang untuk mengubah manajemen antrian manual menjadi digital dan cerdas. Pendekatan yang digunakan dalam sistem ini mengintegrasikan dua metode utama, yaitu:
+Rule-Based Reasoning (RBR): Metode ini digunakan sebagai mesin inferensi untuk menentukan prioritas pelayanan. Sistem akan memproses data keluhan dan gejala pasien menggunakan aturan if-then yang telah ditetapkan (misalnya: JIKA pendarahan hebat MAKA prioritas Gawat Darurat/Merah).
+Time-Based Scheduling (TBS): Metode ini digunakan untuk menyusun jadwal antrian. Setelah prioritas ditentukan, sistem akan menghitung estimasi waktu layanan berdasarkan rata-rata durasi tindakan per poli, sehingga pasien mendapatkan kepastian estimasi jam layanan.
+Hasil akhir yang diharapkan dari kerangka berpikir ini adalah terciptanya aplikasi SPK berbasis web yang mampu meningkatkan efisiensi administrasi, menjamin keselamatan pasien prioritas melalui jalur cepat (fast track), serta memberikan kenyamanan bagi pasien umum melalui transparansi waktu tunggu. Alur kerangka berpikir penelitian ini dapat dilihat pada Gambar 2.1.
+Gambar 2.1 Kerangka Berpikir
+BAB IIIANALISA DAN PERANCANGAN
+3.1 Analisa Sistem 
+Tahap analisa sistem bertujuan untuk memahami proses bisnis yang sedang berjalan, mengidentifikasi kelemahan, dan merancang sistem usulan yang dapat memberikan solusi terhadap permasalahan yang ada di Praktik Bidan Nurlis.
+3.1.1 Analisa Sistem Berjalan
+Berdasarkan hasil observasi dan wawancara, prosedur pelayanan pasien yang saat ini berjalan di Praktik Bidan Nurlis masih dilakukan secara konvensional. Pasien yang datang harus melakukan pendaftaran secara manual dengan menulis data diri di buku kunjungan. Penentuan urutan pelayanan didasarkan pada prinsip First Come First Served (FCFS), di mana pasien yang datang lebih awal akan dilayani terlebih dahulu tanpa adanya klasifikasi prioritas berdasarkan tingkat kegawatdaruratan medis.
+Alur sistem berjalan dapat digambarkan melalui Flowmap berikut:
+Gambar 3.1 Analisa Sistem Berjalan
+3.1.2 Analisa Sistem Usulan
+Sistem usulan dirancang untuk mendigitalkan proses pendaftaran dan menerapkan mekanisme penentuan prioritas otomatis. Dalam sistem ini, admin atau bidan akan menginputkan data pasien beserta gejala klinis yang dialami. Sistem kemudian akan memproses data tersebut menggunakan dua metode utama: 
+Metode Rule-Based Reasoning (RBR): Sistem akan mencocokkan gejala pasien dengan basis aturan (rule base) untuk menentukan kategori prioritas (Gawat Darurat, Mendesak, atau Biasa).
+Metode Time-Based Scheduling (TBS): Setelah prioritas didapatkan, sistem akan menghitung estimasi waktu tunggu dan menyisipkan pasien prioritas tinggi ke urutan yang lebih awal sesuai slot waktu yang tersedia.
+Berikut adalah tabel aturan (rule base) yang digunakan dalam penentuan prioritas:
+Tabel 3.1 Analisa Sistem Susulan
+No
+IF (Kondisi/Gejala)
+THEN (Prioritas)
+Urutan
+Warna
+Estimasi Waktu
+1
+Pendarahan Hebat
+GAWAT
+1
+Merah
+15 Menit
+2
+Kejang-kejang
+GAWAT
+1
+Merah
+15 Menit
+3
+Kontraksi terus-menerus
+GAWAT
+1
+Merah
+15 Menit
+4
+Pecah ketuban
+GAWAT
+1
+Merah
+15 Menit
+5
+Demam tinggi (>38°C)
+MENDESAK
+2
+Kuning
+20 Menit
+6
+Nyeri hebat
+MENDESAK
+2
+Kuning
+20 Menit
+7
+Tekanan darah tidak 
+normal
+MENDESAK
+2
+Kuning
+20 Menit
+8
+Mual muntah berlebihan
+MENDESAK
+2
+Kuning
+20 Menit
+9
+Kontrol kehamilan rutin
+BIASA
+3
+Hijau
+15 Menit
+10
+Konsultasi KB
+BIASA
+3
+Hijau
+15 Menit
+11
+Pemeriksaan umum
+BIASA
+3
+Hijau
+15 Menit
+12
+Imunisasi
+BIASA
+3
+Hijau
+15 Menit
+Alur sistem usulan yang dirancang dapat dilihat pada Flowmap berikut:
+Gambar 3. 2 Analisa Sistem Usulan
+3.2 Perancangan Basis Data 
+Perancangan basis data dilakukan untuk mengelola penyimpanan data yang terstruktur dan saling berelasi guna mendukung kebutuhan informasi sistem.
+3.2.1 Entity Relationship Diagram (ERD)
+Entity Relationship Diagram (ERD) menggambarkan hubungan antar entitas yang terlibat dalam sistem pendukung keputusan ini, meliputi entitas Users (Pengguna), Antrian, Prioritas, dan Pengaturan. Hubungan utama terjadi antara entitas Prioritas dan Antrian untuk menentukan urutan pelayanan.
+Gambar 3.3 Entity Relationship Diagram
+3.2.2 Transformasi ERD ke Logical Record Structure (LRS)
+ahap ini merupakan proses transformasi dari diagram ERD menjadi struktur record logis untuk menentukan kardinalitas hubungan antar tabel (apakah One-to-One atau One-to-Many).
+Gambar 3.4 Transformasi ERD ke LRS
+3.2.3 Logical Record Structure (LRS)
+Berikut adalah hasil akhir struktur logika record yang menggambarkan relasi antar tabel beserta kunci tamu (foreign key) yang terbentuk.
+Gambar 3.5 Logical Record Structture (LRS)
+3.2.4 Normalisasi
+Normalisasi dilakukan untuk mengelompokkan atribut data agar entitas yang terbentuk stabil, fleksibel, dan tidak memiliki redundansi data. Proses ini meliputi tahap bentuk tidak normal (Unnormalized Form), bentuk normal pertama (1NF), kedua (2NF), hingga ketiga (3NF).
+Tabel 3.2 Tabel Normalisasi
+Tahap
+Tabel
+Atribut
+Keterangan
+UNF
+-
+id_antrian, no_antrian, nama_pasien, umur, keluhan, tanggal, status, nama_prioritas, kode_prioritas, urutan, estimasi_waktu, username, password, nama_admin, role, setting_key, setting_value
+Semua data dalam satu tabel, ada redundansi
+1NF
+Data_Antrian
+id, no_antrian, nama_pasien, umur, no_hp, keluhan, tanggal, waktu_daftar, status, nama_prioritas, kode, urutan, estimasi
+Menghilangkan repeating group
+Data_Users
+id, username, password, nama, role
+Nilai atomik
+Data_Pengaturan
+id, setting_key, setting_value
+Nilai atomik
+2NF
+users
+*id, username, password, nama, role
+Atribut bergantung penuh pada PK
+prioritas
+*id, nama, kode, urutan, estimasi_waktu
+Atribut bergantung penuh pada PK
+antrian
+*id, no_antrian, nama_pasien, umur, #prioritas_id, keluhan, tanggal, status
+Menghilangkan ketergantungan parsial
+pengaturan
+*id, setting_key, setting_value
+Atribut bergantung penuh pada PK
+3NF
+users
+*id, username, password, nama, role
+Tidak ada ketergantungan transiti
+prioritas
+*id, nama, kode, urutan, estimasi_waktu
+Tidak ada ketergantungan transitif
+antrian
+*id, no_antrian, nama_pasien, umur, no_hp, tanggal, #prioritas_id, keluhan, waktu_daftar, status
+FK: prioritas_id > prioritas(id)
+pengaturan
+*id, setting_key, setting_value
+Tidak ada ketergantungan transitif
+Keterangan : 
+* = Primary Key
+# = Foreign Key
+Hasil: Tidak ada ketergantungan transitif, semua atribut non-key bergantung langsung pada Primary Key masing-masing tabel.
+3.2.5 Spesifikasi Tabel Users
+Spesifikasi basis data menjelaskan detail struktur tabel yang digunakan dalam sistem, mencakup nama field, tipe data, ukuran, dan keterangannya. 
+Spesifikasi Tabel Users.
+Tabel 3. 3 Spesifikasi Tabel Pasien
+Nama Field
+Tipe Data
+Ukuran
+Keterangan
+id
+INT
+11
+Nomor unik pasien, auto increment (Primary Key)
+username
+VARCHAR
+20
+Nama pengguna untuk login, bersifat unik
+password
+VARCHAR
+255
+Kata sandi yang terenkripsi (hash)
+nama
+VARCHAR
+100
+Nama lengkap admin/bidan
+role
+ENUM
+-
+Peran pengguna ('admin')
+created_at
+DATETIME
+-
+Waktu akun dibuat
+Tabel ini menyimpan data pengguna sistem (admin/bidan) untuk keperluan autentikasi login.
+Spesifikasi Tabel Prioritas.
+Tabel 3.4 Kamus Data Tabel prioritas
+Nama Field
+Tipe Data
+Ukuran
+Keterangan
+id
+INT
+11
+Nomor unik prioritas (Primary Key)
+nama
+VARCHAR
+50
+Nama kategori prioritas (Gawat, Mendesak, Biasa)
+kode
+VARCHAR
+10
+Kode singkat prioritas (GAWAT, MENDESAK, BIASA)
+urutan
+INT
+11
+Urutan prioritas (1 = tertinggi, didahulukan dalam antrian)
+estimasi_waktu
+INT
+11
+Estimasi waktu pelayanan dalam menit (Time-Based Scheduling)
+tanggal
+DATE
+-
+Tanggal pendaftaran antrian
+waktu_daftar
+TIME
+-
+Waktu pasien mendaftar antrian
+status
+ENUM
+-
+Status antrian (menunggu, dilayani, selesai, batal)
+created_at
+DATETIME
+-
+Waktu data antrian dibuat
+updated_at
+DATETIME
+-
+Waktu data terakhir diubah
+Data Default Prioritas (Rules):
+Tabel 3. 5 Data Default Prioritas
+Id
+Nama
+Kode
+Urutan
+Estimasi_waktu
+Kondisi (IF)
+1
+Gawat
+Gawat
+1
+15
+Pendarahan hebat, Kejang, Kontraksi terus-menerus, Pecah ketuban
+2
+Mendesak
+Mendesak
+2
+20
+Demam tinggi, Nyeri hebat, Tekanan darah tidak normal, Mual muntah berlebih
+3
+Biasa
+Biasa
+3
+15
+Kontrol rutin, Konsultasi KB, Pemeriksaan kehamilan biasa
+Tabel ini menyimpan master data prioritas antrian yang merupakan implementasi dari Rule-Based Reasoning. Setiap prioritas memiliki urutan dan estimasi waktu pelayanan.
+Spesifikasi Tabel Antrian.
+Tabel 3. 6 Kamus Data Tabel antrian
+Nama Field
+Tipe Data
+Ukuran
+Keterangan
+id
+INT
+11
+Nomor unik antrian, auto increment (Primary Key)
+no_antrian
+VARCHAR
+10
+Nomor antrian yang ditampilkan (contoh: A001, A002)
+nama_pasien
+VARCHAR
+100
+Nama lengkap pasien
+umur
+INT
+11
+Umur pasien dalam tahun
+no_hp
+VARCHAR
+20
+Nomor HP/telepon pasien
+tanggal
+DATE
+-
+Tanggal pendaftaran antrian
+prioritas_id
+INT
+11
+Referensi ke tabel prioritas (Foreign Key)
+keluhan
+TEXT
+-
+Keluhan atau gejala yang dialami pasien
+waktu_daftar
+TIME
+-
+Waktu pasien mendaftar antrian
+status
+ENUM
+-
+Status antrian ('menunggu', 'dipanggil', 'selesai')
+created_at
+DATETIME
+-
+Waktu data antrian dibuat
+updated_at
+DATETIME
+-
+Waktu data terakhir diubah
+Tabel ini menyimpan data antrian pasien termasuk informasi pasien, prioritas yang dipilih berdasarkan keluhan (Rule-Based), dan status antrian.
+Spesifikasi Tabel Pengaturan
+Tabel 3. 7 Kamus Data Tabel pengaturan
+Nama Field
+Tipe Data
+Ukuran
+Keterangan
+id
+INT
+11
+Nomor unik pengaturan, auto increment (Primary Key)
+setting_key
+VARCHAR
+50
+Nama kunci pengaturan
+setting_value
+VARCHAR
+255
+Nilai dari pengaturan tersebut
+updated_at
+DATETIME
+-
+Waktu pengaturan terakhir diubah
+Data Default Pengaturan:
+Tabel 3. 8 Data Default Pengaturan
+setting_key
+setting_value
+Keterangan
+jam_buka
+08:00
+Jam buka praktik
+jam_tutup
+17:00
+Jam tutup praktik
+Tabel ini menyimpan konfigurasi sistem seperti jam operasional praktik.
+Relasi Antar Tabel
+Tabel 3. 9 Relasi Antar Tabel
+Tabel Induk
+Relasi
+Tabel Anak
+Keterangan
+prioritas
+1 : N
+antrian
+Satu prioritas dapat memiliki banyak antrian. Relasi melalui field prioritas_id (FK).
+Keterangan Notasi:
+* = Primary Key (PK)
+# = Foreign Key (FK)
+1 : N = Relasi One-to-Many
+3.3 Perancangan Unified Modelling Language (UML)
+Perancangan sistem berorientasi objek dimodelkan menggunakan standar UML untuk memvisualisasikan desain sistem dari berbagai perspektif.
+3.3.1 Use Case Diagram
+Use Case Diagram menggambarkan interaksi fungsional antara aktor (Admin/Bidan dan Pasien) dengan sistem. Aktor Admin memiliki hak akses penuh untuk mengelola data master dan aturan prioritas, sedangkan Pasien (jika ada akses mandiri) dapat melihat status antrian.
+Gambar 3. 6 Use Case Diagram
+Deskripsi alur dari Use Case di atas dijelaskan dalam skenario berikut:
+Tabel 3. 10 Skenario Use Case Pendaftaran Pasien
+Nama Use Case
+Pendaftaran Pasien
+Aktor
+Admin/Bidan
+Deskripsi
+Admin/Bidan mendaftarkan pasien ke sistem antrian dengan mengisi data dan memilih prioritas berdasarkan Rule-Based Reasoning
+Kondisi Awal
+Admin sudah login dan halaman pendaftaran terbuka.
+Alur Utama
+Sistem menampilkan form dengan nomor antrian otomatis.
+Admin mengisi nama pasien, umur, dan no. HP.
+Admin memilih tanggal daftar.
+Admin memilih kategori prioritas (Gawat/Mendesak/Biasa).
+Admin mengisi keluhan pasien.
+Admin klik Simpan.
+Sistem menyimpan data dan menampilkan di daftar antrian.
+Alur Alternatif
+Jika data tidak lengkap, sistem menampilkan pesan error
+Kondisi Akhir
+Data pasien tersimpan dan muncul di display antrian sesuai urutan prioritas
+Tabel 3. 11 Skenario Use Case Pilih Prioritas
+Nama Use Case
+Pilih Prioritas (Rule-Based Reasoning)
+Aktor
+Admin/Bidan
+Deskripsi
+Admin memilih kategori prioritas pasien berdasarkan keluhan menggunakan aturan Rule-Based
+Kondisi Awal
+Form pendaftaran sudah diisi
+Alur Utama
+Admin menanyakan keluhan pasien
+Admin memilih prioritas berdasarkan aturan:   - Gawat: Pendarahan, kejang, pecah ketuban   - Mendesak: Demam tinggi, nyeri hebat   - Biasa: Kontrol rutin, konsultasi KB
+Sistem mengurutkan antrian berdasarkan prioritas
+Kondisi Akhir
+Antrian diurutkan: Gawat > Mendesak > Biasa
+3.3.2 Activity Diagram
+Activity Diagram menggambarkan alur kerja (workflow) dari aktivitas utama sistem. Diagram ini difokuskan pada proses Penentuan Prioritas Pelayanan, yang menunjukkan bagaimana sistem menerima input gejala, memprosesnya dengan aturan RBR, dan menghasilkan output status prioritas.
+Gambar 3. 7 Activity Diagram Penentuan Prioritas
+3.3.3 Sequence Diagram
+Sequence Diagram memvisualisasikan interaksi antar objek (antarmuka, kontroler, dan basis data) dalam urutan waktu tertentu. Berikut adalah diagram sekuens untuk proses pendaftaran pasien baru.
+Gambar 3. 8 Sequence Diagram Proses Pendaftaran
+3.3.4 Class Diagram
+Class Diagram menggambarkan struktur statis sistem yang memperlihatkan himpunan kelas-kelas, atribut, metode, serta hubungan antar kelas tersebut.
+Gambar 3. 9 Class Diagram
+3.4 User Interface
+Perancangan antarmuka pengguna (User Interface) dibuat untuk memberikan gambaran visual mengenai tampilan aplikasi yang akan dibangun. Desain ini dirancang agar user-friendly dan memudahkan bidan dalam mengoperasikan sistem.
+3.4.1 Rancangan Halaman Login
+Gambar 3. 10 Rancangan Halaman Login
+3.4.2 Rancangan Halaman Dashboard Utama
+Gambar 3. 11 Rancangan Dashboard Bidan
+3.4.3 Rancangan Form Input Pendaftaran & Gejala
+Gambar 3. 12 Rancangan Form Input Pasien
+3.4.4 Rancangan Tampilan Monitor Antrian
+Gambar 3. 13 Rancangan Monitor Antrian
+DAFTAR PUSTAKA
+Alfar, Y. N. (2024). Pelatihan HTML Dasar Menggunakan Visual Studio Code. APPA: Jurnal Pengabdian Kepada Masyarakat, 1(6), 482–486. https://www.jurnalmahasiswa.com/index.php/appa/article/view/1427
+Ekhlakov, O. (2025). PHP: Methodology for Configuring Third-Party Composer Packages. The American Journal of Engineering and Technology, 7(06), 56–65. https://doi.org/10.37547/tajet/Volume07Issue06-06
+Feng, X., Wang, Y., Lin, J., & Wang, J. (2024). RobustTSN: A Framework for Protecting Time-Sensitive Networking against Unexpected Delays. Computer Networks, 2024, 1–15. https://doi.org/10.1016/j.comnet.2024.110300
+Frayudha, A. D., Pande, I. R., & Juwita, M. B. (2024). Implementation of Black Box Testing with the Application of Equivalence Partitioning Techniques in the M-Magazine Android Application. Elinvo (Electronics, Informatics, and Vocational Education), 9(1), 134–143. https://journal.uny.ac.id/index.php/elinvo/article/view/70382
+Hak, F., Guimarães, T., & Santos, M. (2022). Towards effective clinical decision support systems: A systematic review. PLoS ONE, 17(8), e0272846. https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0272846
+Kassa, Z. Y., Dadi, A. F., & Bizuayehu, H. M. (2025). Implementation, effectiveness, and barriers of obstetric triage in reducing waiting time: a scoping review. BMC Reproductive Health, 22, 1–12. https://bmcreprodohealth.biomedcentral.com/articles/10.1186/s12978-024-01955-w
+Laila, Safaringga, M., Iffah, U., Suryafma, F., Wulandari, T., & Novelin, P. (2024). Analisis Tingkat Kepuasan Pasien Terhadap Pelayanan Antenatal Care di Praktek Mandiri Bidan Delima Sumatera Barat. Jurnal Ilmu Kesehatan (JIK), 8(2), 356–362. https://jik.stikesalifah.ac.id/index.php/jurnalkes/article/view/1032
+Nashrulloh, M. R., & Sopian, A. (2025). Design and Build a Website-Based Queue Booking Information System at Bunda Alya Clinic Using the Rational Unified Process Methodology. Jurnal Sistematik, 1(1), 1–12. https://sinta.kemdiktisaintek.go.id/authors/profile/6714335
+Noorzaman, A. F., & Ramadhan, A. T. (2025). Analisis Kualitas Pelayanan Terhadap Kepuasan Pasien di Praktik Bidan Mandiri (Studi Kasus: Bidan Hj. Iim Maryati, Batujajar, Bandung Barat). Jurnal Manajemen Modal Insani Dan Bisnis (JMMIB), 6(1), 245–255. https://garuda.kemdiktisaintek.go.id/documents/detail/5325265
+Nuryani, E., Hasanah, H., Amiruddin, D., & Pratama, S. S. (2024). Perancangan Sistem Informasi Pelayanan Pasien Berbasis Web Pada Praktik Mandiri Bidan Lia Yulianingsih. Journal of Innovation And Future Technology (IFTECH), 6(1), 1–14. https://jurnaldigit.org/index.php/DIGIT/article/view/441
+Poerwandono, E., Anwar, A. S., Mutia, S., & Damayanti, Y. (2024). Implementasi Sistem Antrian Pasien Berbasis Website Pada Klinik Sehat Tamba Kelurahan Cilangkap. Jurnal Pengabdian Nasional (JPN) Indonesia, 5(2), 346–361. https://journal.stmiki.ac.id/index.php/jpni/article/view/677
+Putri, E. A., Latifa, U., & Stefanie, A. (2022). Web System for Data Collection and Data Transmission with MySQL Data Storage. Journal of Information System, Informatics and Computing, 6(2), 343–360. https://journal.stmikjayakarta.ac.id/index.php/jisicom/article/view/867
+Ramadan, M. G., Hamdani, M., Selma, S., & Dores, A. (2022). Rancang Bangun Sistem Informasi Administrasi Pada Bidan Praktek Swasta Berbasis Website. JUST IT: Jurnal Sistem Informasi, Teknologi Informasi Dan Komputer, 12(3), 1–7. https://jurnal.umj.ac.id/index.php/just-it/article/view/13561
+Rasyade, M. A., & Voutama, A. (2025). Rancang Bangun Website Smartbeez sebagai Platform Edukasi Parenting dan Calistung Anak Berbasis Waterfall. Jurnal Teknologi Terpadu, 11(1), 44–52. https://journal.nurulfikri.ac.id/index.php/JTT/article/view/1732
+Sari, A. N. (2021). Tingkat Kepuasan Pasien Terhadap Pelayanan Kesehatan di Praktik Mandiri Bidan Dyah Gonilan Sukoharjo. Avicenna: Journal of Health Research, 4(2), 24–30. https://jurnal.stikesmus.ac.id/index.php/avicenna/article/view/525
+Seliwati, S., & Nugroho, A. A. (2025). Design and Development of a Laravel-Based Academic Grading System at Piksi Ganesha Polytechnic. International Journal of Information System and Computer Science (IJISCS), 9(1), 115–134. https://jurnal.ftikomibn.ac.id/index.php/ijiscs/article/view/1828
+Shidqia, Q., & Tim. (2025). Pelatihan Pengelolaan Database Menggunakan XAMPP Untuk Meningkatkan Keterampilan Mahasiswa. Jurnal Pengabdian Masyarakat LPKD, 1(1), 43–50. https://pkm.lpkd.or.id/index.php/Karya/article/view/1444
+Telkom University. (2024). Apa Itu Web Browser: Pengertian, Fungsi, dan Jenisnya. https://bif.telkomuniversity.ac.id/apa-itu-web-browser/
+Vidiadivani, W., Wibawa, I. G. A., & Putra, I. G. N. A. C. (2024). Perbandingan Metode Case-Based Reasoning dan Rule-Based Reasoning dengan Metode Backward Chaining untuk Diagnosa Penyakit Thalassemia Beta. JELIKU (Jurnal Elektronik Ilmu Komputer Udayana), 13(2), 357–366. https://ojs.unud.ac.id/index.php/jlk/article/view/117622
+ 
