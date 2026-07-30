@@ -159,6 +159,11 @@
                                                 </button>
                                             </form>
                                         @elseif($a->status === 'dilayani')
+                                            @if($a->patient_id)
+                                                <a href="{{ route('patients.show', $a->patient_id) }}" class="btn btn-sm btn-outline-primary" title="Buka Rekam Medis" target="_blank">
+                                                    <i class="bi bi-folder2-open"></i> Input RM
+                                                </a>
+                                            @endif
                                             <form action="{{ route('antrian.selesai', $a) }}" method="POST" class="d-inline">
                                                 @csrf @method('PATCH')
                                                 <button class="btn btn-sm btn-success" title="Selesai">
