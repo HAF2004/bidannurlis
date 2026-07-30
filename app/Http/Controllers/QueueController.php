@@ -72,6 +72,7 @@ class QueueController extends Controller
             'keluhan' => 'nullable|string',
             'prioritas_id' => 'required_if:is_override,1|exists:prioritas,id',
             'patient_id' => 'nullable|exists:patients,id',
+            'mother_id' => 'nullable|exists:mothers,id',
             'waktu_daftar' => 'nullable|date_format:H:i',
         ];
         
@@ -107,6 +108,7 @@ class QueueController extends Controller
         $antrian = new Antrian([
             'no_antrian' => Antrian::generateNomor(),
             'patient_id' => $data['patient_id'] ?? null,
+            'mother_id' => $data['mother_id'] ?? null,
             'nama_pasien' => $data['nama_pasien'],
             'umur' => $data['umur'],
             'no_hp' => $data['no_hp'],

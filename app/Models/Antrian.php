@@ -12,6 +12,7 @@ class Antrian extends Model
     protected $fillable = [
         'no_antrian',
         'patient_id',
+        'mother_id',
         'nama_pasien',
         'umur',
         'no_hp',
@@ -43,6 +44,11 @@ class Antrian extends Model
     public function patient()
     {
         return $this->belongsTo(Patient::class);
+    }
+    
+    public function mother()
+    {
+        return $this->belongsTo(Mother::class);
     }
 
     public function creator()

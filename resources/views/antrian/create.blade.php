@@ -20,6 +20,7 @@
                                 <label class="form-label fw-bold">Cari Pasien Terdaftar <small
                                         class="text-muted">(opsional — cari berdasarkan nama, NIK, No. HP, atau No. RM)</small></label>
                                 <input type="hidden" name="patient_id" id="hiddenPatientId" value="{{ old('patient_id') }}">
+                                <input type="hidden" name="mother_id" id="hiddenMotherId" value="{{ old('mother_id') }}">
                                 <div class="position-relative">
                                     <input type="text" id="searchPatient" class="form-control"
                                         placeholder="Ketik nama, NIK, No. HP, atau No. RM..." autocomplete="off">
@@ -46,7 +47,7 @@
                                         @endforeach
                                         @foreach($mothers as $m)
                                             {
-                                                id: "",
+                                                id: "{{ $m->id }}",
                                                 type: "mother",
                                                 nama: @json($m->nama_ibu),
                                                 nik: "",
@@ -237,7 +238,8 @@
         // ─── SEARCH PASIEN ───
         const searchInput = document.getElementById('searchPatient');
         const searchResults = document.getElementById('searchResults');
-        const hiddenId = document.getElementById('hiddenPatientId');
+        const hiddenPatientId = document.getElementById('hiddenPatientId');
+        const hiddenMotherId = document.getElementById('hiddenMotherId');
 
         searchInput.addEventListener('input', function () {
             const q = this.value.trim().toLowerCase();
@@ -285,8 +287,15 @@
             const matches = searchResults._matches;
             const p = matches[idx];
 
-            // Set form values
-            hiddenId.value = p.id || '';
+            // Set form values based on type
+            if (p.type === 'mother') {
+                hiddenMotherId.value = p.id || '';
+                hiddenPatientId.value = '';
+            } else {
+                hiddenPatientId.value = p.id || '';
+                hiddenMotherId.value = '';
+            }
+            
             document.getElementById('inputNama').value = p.nama;
             document.getElementById('inputUmur').value = p.umur || '';
             document.getElementById('inputHp').value = p.hp || '';
@@ -306,9 +315,10 @@
             }
         });
 
-        // Reset hidden ID saat user mengetik ulang
+        // Reset hidden IDs saat user mengetik ulang
         searchInput.addEventListener('input', function () {
-            hiddenId.value = '';
+            hiddenPatientId.value = '';
+            hiddenMotherId.value = '';
         });
 
         // Toggle Veto

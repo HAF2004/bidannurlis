@@ -159,7 +159,11 @@
                                                 </button>
                                             </form>
                                         @elseif($a->status === 'dilayani')
-                                            @if($a->patient_id)
+                                            @if(in_array($a->jenis_layanan, ['Persalinan', 'KB', 'ANC']) && $a->mother_id)
+                                                <a href="{{ route('mothers.show', $a->mother_id) }}" class="btn btn-sm btn-outline-primary" title="Buka Kartu Ibu" target="_blank">
+                                                    <i class="bi bi-folder2-open"></i> Input KIA
+                                                </a>
+                                            @elseif($a->patient_id)
                                                 <a href="{{ route('patients.show', $a->patient_id) }}" class="btn btn-sm btn-outline-primary" title="Buka Rekam Medis" target="_blank">
                                                     <i class="bi bi-folder2-open"></i> Input RM
                                                 </a>
