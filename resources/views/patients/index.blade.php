@@ -88,6 +88,10 @@
                                             title="Edit">
                                             <i class="bi bi-pencil"></i>
                                         </a>
+                                        <a href="{{ route('patients.print', $patient) }}" class="btn btn-outline-success"
+                                            title="Cetak" target="_blank">
+                                            <i class="bi bi-printer"></i>
+                                        </a>
                                         <form action="{{ route('patients.destroy', $patient) }}" method="POST" class="d-inline"
                                             onsubmit="return confirm('Hapus data ini?')">
                                             @csrf
