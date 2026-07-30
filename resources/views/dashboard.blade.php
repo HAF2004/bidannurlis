@@ -81,6 +81,7 @@
                     <a href="{{ route('patients.index') }}" class="btn btn-sm btn-outline-primary">Lihat Semua</a>
                 </div>
                 <div class="card-body p-0">
+                    <div class="table-responsive">
                     <table class="table table-hover mb-0">
                         <thead>
                             <tr>
@@ -108,11 +109,12 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4" class="text-center text-muted py-4">Belum ada data</td>
+                                    <td colspan="4" class="text-center text-muted py-4"><i class="bi bi-inbox fs-4 d-block mb-1"></i>Belum ada data</td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -122,6 +124,7 @@
                     <span><i class="bi bi-clipboard2-pulse me-1"></i>Berobat Umum Terbaru</span>
                 </div>
                 <div class="card-body p-0">
+                    <div class="table-responsive">
                     <table class="table table-hover mb-0">
                         <thead>
                             <tr>
@@ -139,11 +142,12 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3" class="text-center text-muted py-4">Belum ada data</td>
+                                    <td colspan="3" class="text-center text-muted py-4"><i class="bi bi-inbox fs-4 d-block mb-1"></i>Belum ada data</td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -157,6 +161,7 @@
                     <a href="{{ route('mothers.index') }}" class="btn btn-sm btn-outline-primary">Lihat Semua</a>
                 </div>
                 <div class="card-body p-0">
+                    <div class="table-responsive">
                     <table class="table table-hover mb-0">
                         <thead>
                             <tr>
@@ -175,11 +180,12 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3" class="text-center text-muted py-4">Belum ada data</td>
+                                    <td colspan="3" class="text-center text-muted py-4"><i class="bi bi-inbox fs-4 d-block mb-1"></i>Belum ada data</td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -187,6 +193,7 @@
             <div class="card">
                 <div class="card-header"><i class="bi bi-calendar-check me-1"></i>Kunjungan ANC Terbaru</div>
                 <div class="card-body p-0">
+                    <div class="table-responsive">
                     <table class="table table-hover mb-0">
                         <thead>
                             <tr>
@@ -204,11 +211,12 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3" class="text-center text-muted py-4">Belum ada data ANC</td>
+                                    <td colspan="3" class="text-center text-muted py-4"><i class="bi bi-inbox fs-4 d-block mb-1"></i>Belum ada data ANC</td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
