@@ -52,7 +52,7 @@ class RuleBasedReasoningService
 
         // Aturan Khusus Pengecekan Silang (Tensi)
         // Ibu dengan tensi darah tinggi (Sistolik >= 140 atau Diastolik >= 90) otomatis naik prioritas
-        if ($tensiSistolik >= 140 || $tensiDiastolik >= 90) {
+        if ((!is_null($tensiSistolik) && $tensiSistolik >= 140) || (!is_null($tensiDiastolik) && $tensiDiastolik >= 90)) {
             return $prioritasMendesak;
         }
 

@@ -60,7 +60,7 @@ class QueueController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $rules = [
             'nama_pasien' => 'required|string|max:100',
             'umur' => 'nullable|integer|min:0|max:150',
             'no_hp' => 'nullable|string|max:20|regex:/^[0-9]*$/',
@@ -70,10 +70,18 @@ class QueueController extends Controller
             'berat_badan' => 'nullable|numeric',
             'is_override' => 'nullable',
             'keluhan' => 'nullable|string',
-            'prioritas_id' => 'nullable|exists:prioritas,id',
+            'prioritas_id' => 'required_if:is_override,1|exists:prioritas,id',
             'patient_id' => 'nullable|exists:patients,id',
             'waktu_daftar' => 'nullable|date_format:H:i',
-        ]);
+        ];
+        
+        $messages = [
+            'prioritas_id.required_if' => 'Silakan pilih tingkat prioritas (Merah/Kuning/Hijau) jika Hak Veto diaktifkan.',
+            'umur.max' => 'Umur tidak masuk akal (maksimal 150).',
+            'no_hp.regex' => 'Nomor HP hanya boleh berisi angka.',
+        ];
+
+        $data = $request->validate($rules, $messages);
 
         // ═══════════════════════════════════════════════
         // STEP 1: RULE-BASED REASONING (RBR)

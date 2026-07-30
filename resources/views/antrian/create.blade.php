@@ -70,18 +70,20 @@
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label fw-bold">Umur</label>
-                                <div class="input-group">
-                                    <input type="number" name="umur" id="inputUmur" class="form-control" min="0" max="150"
+                                <div class="input-group has-validation">
+                                    <input type="number" name="umur" id="inputUmur" class="form-control @error('umur') is-invalid @enderror" min="0" max="150"
                                         value="{{ old('umur') }}">
                                     <span class="input-group-text">tahun</span>
+                                    @error('umur') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label fw-bold">No. HP</label>
-                                <input type="tel" name="no_hp" id="inputHp" class="form-control"
+                                <input type="tel" name="no_hp" id="inputHp" class="form-control @error('no_hp') is-invalid @enderror"
                                     value="{{ old('no_hp') }}" pattern="[0-9]*" inputmode="numeric"
                                     oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                     placeholder="08xxxxxxxxxx">
+                                @error('no_hp') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
                             
                             {{-- TIMESTAMPS / WAKTU DAFTAR MANUAL UNTUK BOOKING WA --}}
@@ -94,43 +96,48 @@
 
                             <div class="col-md-6">
                                 <label class="form-label fw-bold">Jenis Layanan <span class="text-danger">*</span></label>
-                                <select name="jenis_layanan" id="inputLayanan" class="form-select" required>
+                                <select name="jenis_layanan" id="inputLayanan" class="form-select @error('jenis_layanan') is-invalid @enderror" required>
                                     <option value="">-- Pilih Layanan --</option>
-                                    <option value="Persalinan">Persalinan 24 Jam</option>
-                                    <option value="KB">Keluarga Berencana (KB)</option>
-                                    <option value="ANC">Periksa Kehamilan (ANC)</option>
-                                    <option value="Imunisasi">Imunisasi</option>
-                                    <option value="Anak">Periksa Perkembangan Anak</option>
-                                    <option value="Umum">Berobat Umum</option>
+                                    <option value="Persalinan" {{ old('jenis_layanan') == 'Persalinan' ? 'selected' : '' }}>Persalinan 24 Jam</option>
+                                    <option value="KB" {{ old('jenis_layanan') == 'KB' ? 'selected' : '' }}>Keluarga Berencana (KB)</option>
+                                    <option value="ANC" {{ old('jenis_layanan') == 'ANC' ? 'selected' : '' }}>Periksa Kehamilan (ANC)</option>
+                                    <option value="Imunisasi" {{ old('jenis_layanan') == 'Imunisasi' ? 'selected' : '' }}>Imunisasi</option>
+                                    <option value="Anak" {{ old('jenis_layanan') == 'Anak' ? 'selected' : '' }}>Periksa Perkembangan Anak</option>
+                                    <option value="Umum" {{ old('jenis_layanan') == 'Umum' ? 'selected' : '' }}>Berobat Umum</option>
                                 </select>
+                                @error('jenis_layanan') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
 
                             <div class="col-12">
                                 <label class="form-label fw-bold">Keluhan / Gejala Utama</label>
-                                <textarea name="keluhan" id="inputKeluhan" class="form-control" rows="2"
+                                <textarea name="keluhan" id="inputKeluhan" class="form-control @error('keluhan') is-invalid @enderror" rows="2"
                                     placeholder="Contoh: pendarahan hebat, demam tinggi, kontrol rutin...">{{ old('keluhan') }}</textarea>
+                                @error('keluhan') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                 <small class="text-muted">Ketik keluhan untuk mengaktifkan deteksi prioritas otomatis (RBR)</small>
                             </div>
 
                             <div class="col-md-4">
                                 <label class="form-label fw-bold">Tensi (Sistolik)</label>
-                                <div class="input-group">
-                                    <input type="number" name="tensi_sistolik" id="inputSistolik" class="form-control" placeholder="120">
+                                <div class="input-group has-validation">
+                                    <input type="number" name="tensi_sistolik" id="inputSistolik" class="form-control @error('tensi_sistolik') is-invalid @enderror" placeholder="120" value="{{ old('tensi_sistolik') }}">
                                     <span class="input-group-text">mmHg</span>
+                                    @error('tensi_sistolik') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label fw-bold">Tensi (Diastolik)</label>
-                                <div class="input-group">
-                                    <input type="number" name="tensi_diastolik" id="inputDiastolik" class="form-control" placeholder="80">
+                                <div class="input-group has-validation">
+                                    <input type="number" name="tensi_diastolik" id="inputDiastolik" class="form-control @error('tensi_diastolik') is-invalid @enderror" placeholder="80" value="{{ old('tensi_diastolik') }}">
                                     <span class="input-group-text">mmHg</span>
+                                    @error('tensi_diastolik') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label fw-bold">Berat Badan</label>
-                                <div class="input-group">
-                                    <input type="number" step="0.1" name="berat_badan" id="inputBerat" class="form-control" placeholder="60">
+                                <div class="input-group has-validation">
+                                    <input type="number" step="0.1" name="berat_badan" id="inputBerat" class="form-control @error('berat_badan') is-invalid @enderror" placeholder="60" value="{{ old('berat_badan') }}">
                                     <span class="input-group-text">kg</span>
+                                    @error('berat_badan') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                 </div>
                             </div>
 
@@ -175,6 +182,7 @@
                                         </div>
                                     @endforeach
                                 </div>
+                                @error('prioritas_id') <div class="text-danger fw-bold mt-2"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div> @enderror
                                 <small class="text-muted mt-2 d-block"><i class="bi bi-robot"></i> Sistem otomatis mendeteksi prioritas dari Tensi dan Keluhan. Aktifkan Hak Veto untuk mengubah manual.</small>
                             </div>
                         </div>
@@ -310,7 +318,10 @@
         
         switchVeto.addEventListener('change', function() {
             const isVeto = this.checked;
-            prioRadios.forEach(radio => radio.disabled = !isVeto);
+            prioRadios.forEach(radio => {
+                radio.disabled = !isVeto;
+                radio.required = isVeto; // Menambahkan atribut required
+            });
             prioLabels.forEach(label => {
                 if(isVeto) label.classList.remove('disabled-label');
                 else label.classList.add('disabled-label');
