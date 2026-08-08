@@ -37,6 +37,23 @@ class Patient extends Model
         'tanggal_lahir' => 'date',
     ];
 
+    public static function generateNoRm(): string
+    {
+        $prefix = 'RM-' . date('Ym') . '-';
+        $lastPatient = self::where('no_rm', 'like', $prefix . '%')
+            ->orderBy('no_rm', 'desc')
+            ->first();
+
+        if ($lastPatient && preg_match('/-(\d+)$/', $lastPatient->no_rm, $matches)) {
+            $lastNumber = (int) $matches[1];
+            $nextNumber = $lastNumber + 1;
+        } else {
+            $nextNumber = 1;
+        }
+
+        return $prefix . str_pad($nextNumber, 4, '0', STR_PAD_LEFT);
+    }
+
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');

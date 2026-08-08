@@ -52,40 +52,44 @@
 
                     <div class="col-12">
                         <hr>
-                        <h6 class="text-muted">Alamat</h6>
+                        <h6 class="text-muted mb-0"><i class="bi bi-geo-alt me-1"></i> Alamat</h6>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Alamat</label>
+                        <label class="form-label">Alamat Lengkap (Jalan / Gang / No. Rumah)</label>
                         <textarea name="alamat" class="form-control"
-                            rows="2">{{ old('alamat', $patient->alamat) }}</textarea>
+                            rows="2" placeholder="Contoh: Jl. Kav. Keuangan Raya No. 12">{{ old('alamat', $patient->alamat) }}</textarea>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">RT</label>
-                        <input type="text" name="rt" class="form-control" value="{{ old('rt', $patient->rt) }}">
+                        <input type="text" name="rt" class="form-control" value="{{ old('rt', $patient->rt) }}" placeholder="01">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">RW</label>
-                        <input type="text" name="rw" class="form-control" value="{{ old('rw', $patient->rw) }}">
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">Desa/Kelurahan</label>
-                        <input type="text" name="desa_kelurahan" class="form-control"
-                            value="{{ old('desa_kelurahan', $patient->desa_kelurahan) }}">
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">Kecamatan</label>
-                        <input type="text" name="kecamatan" class="form-control"
-                            value="{{ old('kecamatan', $patient->kecamatan) }}">
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">Kabupaten</label>
-                        <input type="text" name="kabupaten" class="form-control"
-                            value="{{ old('kabupaten', $patient->kabupaten) }}">
+                        <input type="text" name="rw" class="form-control" value="{{ old('rw', $patient->rw) }}" placeholder="02">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Provinsi</label>
-                        <input type="text" name="provinsi" class="form-control"
-                            value="{{ old('provinsi', $patient->provinsi) }}">
+                        <input type="text" name="provinsi" id="provinsi" list="list_provinsi" class="form-control"
+                            value="{{ old('provinsi', $patient->provinsi) }}" placeholder="Ketik / pilih provinsi..." autocomplete="off">
+                        <datalist id="list_provinsi"></datalist>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Kabupaten / Kota</label>
+                        <input type="text" name="kabupaten" id="kabupaten" list="list_kabupaten" class="form-control"
+                            value="{{ old('kabupaten', $patient->kabupaten) }}" placeholder="Ketik / pilih kab/kota..." autocomplete="off">
+                        <datalist id="list_kabupaten"></datalist>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Kecamatan</label>
+                        <input type="text" name="kecamatan" id="kecamatan" list="list_kecamatan" class="form-control"
+                            value="{{ old('kecamatan', $patient->kecamatan) }}" placeholder="Ketik / pilih kecamatan..." autocomplete="off">
+                        <datalist id="list_kecamatan"></datalist>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Desa / Kelurahan</label>
+                        <input type="text" name="desa_kelurahan" id="desa_kelurahan" list="list_desa" class="form-control"
+                            value="{{ old('desa_kelurahan', $patient->desa_kelurahan) }}" placeholder="Ketik / pilih desa/kel..." autocomplete="off">
+                        <datalist id="list_desa"></datalist>
                     </div>
 
                     <div class="col-12">
@@ -150,3 +154,19 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/wilayah-autofill.js') }}"></script>
+    <script>
+        initSearchableWilayah({
+            provinsi: '#provinsi',
+            listProvinsi: '#list_provinsi',
+            kabupaten: '#kabupaten',
+            listKabupaten: '#list_kabupaten',
+            kecamatan: '#kecamatan',
+            listKecamatan: '#list_kecamatan',
+            desa: '#desa_kelurahan',
+            listDesa: '#list_desa'
+        });
+    </script>
+@endpush

@@ -39,7 +39,12 @@ class DeliveryController extends Controller
             'menggunakan_partograf' => 'nullable|boolean',
             'catat_buku_kia' => 'nullable|boolean',
             'komplikasi_persalinan' => 'nullable|array',
+            'penanganan_komplikasi' => 'nullable|string',
+            'penanganan_keterangan' => 'nullable|string',
             'dirujuk_ke' => 'nullable|string',
+            'keadaan_tiba' => 'nullable|string',
+            'keadaan_pulang' => 'nullable|string',
+            'alamat_bersalin' => 'nullable|string',
         ]);
 
         $validated['mother_id'] = $mother->id;
@@ -81,7 +86,12 @@ class DeliveryController extends Controller
             'menggunakan_partograf' => 'nullable|boolean',
             'catat_buku_kia' => 'nullable|boolean',
             'komplikasi_persalinan' => 'nullable|array',
+            'penanganan_komplikasi' => 'nullable|string',
+            'penanganan_keterangan' => 'nullable|string',
             'dirujuk_ke' => 'nullable|string',
+            'keadaan_tiba' => 'nullable|string',
+            'keadaan_pulang' => 'nullable|string',
+            'alamat_bersalin' => 'nullable|string',
         ]);
 
         $delivery->update($validated);

@@ -10,7 +10,7 @@
     <meta http-equiv="refresh" content="10">
     <style>
         body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background: #0f172a;
             color: #f8fafc;
             font-family: 'Segoe UI', system-ui, sans-serif;
             min-height: 100vh;
@@ -18,9 +18,8 @@
         }
 
         .monitor-header {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: #1e293b;
+            border-bottom: 1px solid #334155;
             padding: 1rem 2rem;
         }
 
@@ -30,24 +29,11 @@
         }
 
         .now-serving {
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
-            border-radius: 20px;
+            background: #1d4ed8;
+            border-radius: 12px;
             padding: 2rem 3rem;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
-            animation: pulse-glow 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-glow {
-
-            0%,
-            100% {
-                box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
-            }
-
-            50% {
-                box-shadow: 0 20px 60px rgba(59, 130, 246, 0.5);
-            }
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
         }
 
         .now-serving .number {
@@ -92,19 +78,19 @@
         }
 
         .queue-item {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
             padding: 1rem 1.5rem;
             margin-bottom: 0.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
         .queue-item:hover {
-            background: rgba(255, 255, 255, 0.08);
+            background: #273549;
         }
 
         .queue-number {
@@ -151,7 +137,7 @@
     @endphp
 
     @if($isMenanganiGawat)
-    <div class="bg-danger text-white text-center py-2 fw-bold w-100" style="font-size: 1.5rem; letter-spacing: 1px; animation: pulse-glow 2s infinite; border-bottom: 2px solid #b91c1c;">
+    <div class="bg-danger text-white text-center py-2 fw-bold w-100" style="font-size: 1.5rem; letter-spacing: 1px; border-bottom: 2px solid #b91c1c;">
         <i class="bi bi-exclamation-triangle-fill me-2"></i> Mohon maaf, Bidan sedang menangani pasien Gawat Darurat.
     </div>
     @endif

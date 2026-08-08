@@ -64,7 +64,7 @@ class PatientController extends Controller
         ]);
 
         $data['created_by'] = auth()->id();
-        $data['no_rm'] = 'RM-' . str_pad(Patient::max('id') + 1, 5, '0', STR_PAD_LEFT);
+        $data['no_rm'] = Patient::generateNoRm();
 
         $patient = Patient::create($data);
 

@@ -4,127 +4,98 @@
 @section('page-title', 'Dashboard')
 
 @section('content')
-    {{-- Queue Quick Access --}}
-    <div class="card mb-3 border-0 shadow-sm" style="background: linear-gradient(135deg, #1e40af, #3b82f6); color: white;">
-        <div class="card-body d-flex justify-content-between align-items-center py-3">
-            <div>
-                <h5 class="mb-1"><i class="bi bi-list-ol me-2"></i>Antrian Hari Ini</h5>
-                <span class="me-3"><strong>{{ $stats['antrian_hari_ini'] }}</strong> total</span>
-                <span><strong>{{ $stats['antrian_menunggu'] }}</strong> menunggu</span>
-            </div>
-
-        </div>
-    </div>
-
-    {{-- Stats Row 1 --}}
+    {{-- Ringkasan Data --}}
     <div class="row g-3 mb-3">
         <div class="col-md-3">
-            <div class="stat-card">
-                <div class="stat-value">{{ $stats['total_pasien'] }}</div>
-                <div class="stat-label"><i class="bi bi-people me-1"></i>Total Pasien</div>
+            <div class="card text-center py-3">
+                <div class="fs-3 fw-bold">{{ $stats['total_pasien'] }}</div>
+                <small class="text-muted">Total Pasien</small>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="stat-card accent">
-                <div class="stat-value">{{ $stats['berobat_bulan_ini'] }}</div>
-                <div class="stat-label"><i class="bi bi-clipboard2-pulse me-1"></i>Berobat Bulan Ini</div>
+            <div class="card text-center py-3">
+                <div class="fs-3 fw-bold">{{ $stats['pasien_bulan_ini'] }}</div>
+                <small class="text-muted">Pasien Baru Bulan Ini</small>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="stat-card" style="background: linear-gradient(135deg, #0891b2, #0e7490);">
-                <div class="stat-value">{{ $stats['imunisasi_bulan_ini'] }}</div>
-                <div class="stat-label"><i class="bi bi-shield-plus me-1"></i>Imunisasi Bulan Ini</div>
+            <div class="card text-center py-3">
+                <div class="fs-3 fw-bold">{{ $stats['berobat_bulan_ini'] }}</div>
+                <small class="text-muted">Berobat Bulan Ini</small>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="stat-card" style="background: linear-gradient(135deg, #d946ef, #a21caf);">
-                <div class="stat-value">{{ $stats['kb_aktif'] }}</div>
-                <div class="stat-label"><i class="bi bi-heart me-1"></i>Peserta KB</div>
+            <div class="card text-center py-3">
+                <div class="fs-3 fw-bold">{{ $stats['total_ibu'] }}</div>
+                <small class="text-muted">Data Kehamilan</small>
             </div>
         </div>
     </div>
-
-    {{-- Stats Row 2 --}}
     <div class="row g-3 mb-4">
         <div class="col-md-3">
-            <div class="stat-card" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
-                <div class="stat-value">{{ $stats['total_ibu'] }}</div>
-                <div class="stat-label"><i class="bi bi-gender-female me-1"></i>Data Kehamilan</div>
+            <div class="card text-center py-3">
+                <div class="fs-3 fw-bold">{{ $stats['pemeriksaan_bulan_ini'] }}</div>
+                <small class="text-muted">ANC Bulan Ini</small>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="stat-card accent">
-                <div class="stat-value">{{ $stats['pemeriksaan_bulan_ini'] }}</div>
-                <div class="stat-label"><i class="bi bi-calendar-check me-1"></i>ANC Bulan Ini</div>
+            <div class="card text-center py-3">
+                <div class="fs-3 fw-bold">{{ $stats['persalinan_bulan_ini'] }}</div>
+                <small class="text-muted">Persalinan Bulan Ini</small>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="stat-card">
-                <div class="stat-value">{{ $stats['persalinan_bulan_ini'] }}</div>
-                <div class="stat-label"><i class="bi bi-person-hearts me-1"></i>Persalinan Bulan Ini</div>
+            <div class="card text-center py-3">
+                <div class="fs-3 fw-bold">{{ $stats['imunisasi_bulan_ini'] }}</div>
+                <small class="text-muted">Imunisasi Bulan Ini</small>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="stat-card" style="background: linear-gradient(135deg, #6366f1, #4338ca);">
-                <div class="stat-value">{{ $stats['pasien_bulan_ini'] }}</div>
-                <div class="stat-label"><i class="bi bi-person-plus me-1"></i>Pasien Baru Bulan Ini</div>
+            <div class="card text-center py-3">
+                <div class="fs-3 fw-bold">{{ $stats['antrian_hari_ini'] }}</div>
+                <small class="text-muted">Antrian Hari Ini</small>
             </div>
         </div>
     </div>
 
-    {{-- Recent Data --}}
+
+    {{-- Tabel Data Terbaru --}}
     <div class="row g-4">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <span><i class="bi bi-people me-1"></i>Pasien Terbaru</span>
-                    <a href="{{ route('patients.index') }}" class="btn btn-sm btn-outline-primary">Lihat Semua</a>
-                </div>
+                <div class="card-header">Pasien Terbaru</div>
                 <div class="card-body p-0">
-                    <div class="table-responsive">
                     <table class="table table-hover mb-0">
                         <thead>
                             <tr>
+                                <th>No. RM</th>
                                 <th>Nama</th>
                                 <th>L/P</th>
-                                <th>Tanggal</th>
-                                <th></th>
+                                <th>Tgl Daftar</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($recentPatients as $patient)
                                 <tr>
-                                    <td>
-                                        <strong>{{ $patient->nama }}</strong>
-                                        @if($patient->no_rm)<br><small class="text-muted">{{ $patient->no_rm }}</small>@endif
-                                    </td>
-                                    <td><span
-                                            class="badge {{ $patient->jenis_kelamin == 'L' ? 'bg-primary' : 'bg-danger' }}">{{ $patient->jenis_kelamin }}</span>
-                                    </td>
+                                    <td><small>{{ $patient->no_rm ?? '-' }}</small></td>
+                                    <td>{{ $patient->nama }}</td>
+                                    <td>{{ $patient->jenis_kelamin }}</td>
                                     <td>{{ $patient->created_at->format('d/m/Y') }}</td>
-                                    <td>
-                                        <a href="{{ route('patients.show', $patient) }}"
-                                            class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></a>
-                                    </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4" class="text-center text-muted py-4"><i class="bi bi-inbox fs-4 d-block mb-1"></i>Belum ada data</td>
+                                    <td colspan="4" class="text-center text-muted py-3">Belum ada data</td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
-                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <span><i class="bi bi-clipboard2-pulse me-1"></i>Berobat Umum Terbaru</span>
-                </div>
+                <div class="card-header">Berobat Umum Terbaru</div>
                 <div class="card-body p-0">
-                    <div class="table-responsive">
                     <table class="table table-hover mb-0">
                         <thead>
                             <tr>
@@ -138,16 +109,15 @@
                                 <tr>
                                     <td>{{ $t->patient->nama ?? '-' }}</td>
                                     <td>{{ $t->tanggal_kunjungan->format('d/m/Y') }}</td>
-                                    <td class="small">{{ Str::limit($t->diagnosa, 30) ?? '-' }}</td>
+                                    <td><small>{{ Str::limit($t->diagnosa, 30) ?? '-' }}</small></td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3" class="text-center text-muted py-4"><i class="bi bi-inbox fs-4 d-block mb-1"></i>Belum ada data</td>
+                                    <td colspan="3" class="text-center text-muted py-3">Belum ada data</td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
-                    </div>
                 </div>
             </div>
         </div>
@@ -156,44 +126,35 @@
     <div class="row g-4 mt-0">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <span><i class="bi bi-gender-female me-1"></i>Ibu Hamil Terbaru</span>
-                    <a href="{{ route('mothers.index') }}" class="btn btn-sm btn-outline-primary">Lihat Semua</a>
-                </div>
+                <div class="card-header">Ibu Hamil Terbaru</div>
                 <div class="card-body p-0">
-                    <div class="table-responsive">
                     <table class="table table-hover mb-0">
                         <thead>
                             <tr>
                                 <th>Nama</th>
-                                <th>Tanggal Daftar</th>
-                                <th></th>
+                                <th>Tgl Daftar</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($recentMothers as $mother)
                                 <tr>
-                                    <td><strong>{{ $mother->nama_ibu }}</strong></td>
+                                    <td>{{ $mother->nama_ibu }}</td>
                                     <td>{{ $mother->created_at->format('d/m/Y') }}</td>
-                                    <td><a href="{{ route('mothers.show', $mother) }}"
-                                            class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></a></td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3" class="text-center text-muted py-4"><i class="bi bi-inbox fs-4 d-block mb-1"></i>Belum ada data</td>
+                                    <td colspan="2" class="text-center text-muted py-3">Belum ada data</td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
-                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header"><i class="bi bi-calendar-check me-1"></i>Kunjungan ANC Terbaru</div>
+                <div class="card-header">Kunjungan ANC Terbaru</div>
                 <div class="card-body p-0">
-                    <div class="table-responsive">
                     <table class="table table-hover mb-0">
                         <thead>
                             <tr>
@@ -211,16 +172,14 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3" class="text-center text-muted py-4"><i class="bi bi-inbox fs-4 d-block mb-1"></i>Belum ada data ANC</td>
+                                    <td colspan="3" class="text-center text-muted py-3">Belum ada data ANC</td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 
 @endsection

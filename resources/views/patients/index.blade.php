@@ -64,7 +64,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <span class="badge {{ $patient->jenis_kelamin == 'L' ? 'bg-primary' : 'bg-danger' }}">
+                                    <span class="badge bg-light text-dark">
                                         {{ $patient->jenis_kelamin }}
                                     </span>
                                 </td>
@@ -80,7 +80,7 @@
                                 <td>{{ $patient->created_at->format('d/m/Y') }}</td>
                                 <td class="text-end">
                                     <div class="btn-group btn-group-sm">
-                                        <a href="{{ route('patients.show', $patient) }}" class="btn btn-outline-primary"
+                                        <a href="{{ route('patients.show', $patient) }}" class="btn btn-outline-secondary"
                                             title="Lihat">
                                             <i class="bi bi-eye"></i>
                                         </a>
@@ -88,19 +88,19 @@
                                             title="Edit">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a href="{{ route('patients.print', $patient) }}" class="btn btn-outline-success"
+                                        <a href="{{ route('patients.print', $patient) }}" class="btn btn-outline-secondary"
                                             title="Cetak" target="_blank">
                                             <i class="bi bi-printer"></i>
                                         </a>
-                                        <form action="{{ route('patients.destroy', $patient) }}" method="POST" class="d-inline"
-                                            onsubmit="return confirm('Hapus data ini?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-outline-danger" title="Hapus">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
                                     </div>
+                                    <form action="{{ route('patients.destroy', $patient) }}" method="POST" class="d-inline ms-1"
+                                        onsubmit="return confirm('Hapus data ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Hapus">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @empty

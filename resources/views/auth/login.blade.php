@@ -4,17 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Kartu Ibu</title>
+    <title>Login - SIMAR</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #4f46e5;
-            --primary-dark: #3730a3;
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
         }
 
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: #f1f5f9;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -23,8 +23,9 @@
 
         .login-card {
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
             padding: 2.5rem;
             width: 100%;
             max-width: 420px;
@@ -38,7 +39,7 @@
         .login-header .icon {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: var(--primary-color);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -71,29 +72,29 @@
 
         .form-control {
             padding: 0.75rem 1rem;
-            border-radius: 8px;
+            border-radius: 6px;
             border: 1px solid #e2e8f0;
         }
 
         .form-control:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
         }
 
         .btn-login {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: var(--primary-color);
             border: none;
             padding: 0.875rem 1.5rem;
-            border-radius: 8px;
+            border-radius: 6px;
             font-weight: 600;
             width: 100%;
             color: white;
-            transition: all 0.3s ease;
+            transition: background-color 0.2s ease;
         }
 
         .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+            background: var(--primary-dark);
+            color: white;
         }
 
         .alert {
@@ -112,8 +113,8 @@
                         d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                 </svg>
             </div>
-            <h1>Kartu Ibu</h1>
-            <p>Sistem Pembukuan Digital Bidan</p>
+            <h1>SIMAR</h1>
+            <p>Sistem Informasi Manajemen Antrian dan Rekam Medis</p>
         </div>
 
         @if($errors->any())

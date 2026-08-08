@@ -177,14 +177,14 @@
                                                     <span class="badge bg-{{ $bgHover }}">{{ $p->estimasi_waktu }} mnt</span>
                                                 </div>
                                                 <small class="d-block mt-1 text-muted flex-grow-1" style="font-size: 0.75rem;">
-                                                    IF: {{ $p->gejala }}
+                                                    Gejala: {{ Str::limit($p->gejala, 80) }}
                                                 </small>
                                             </label>
                                         </div>
                                     @endforeach
                                 </div>
                                 @error('prioritas_id') <div class="text-danger fw-bold mt-2"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div> @enderror
-                                <small class="text-muted mt-2 d-block"><i class="bi bi-robot"></i> Sistem otomatis mendeteksi prioritas dari Tensi dan Keluhan. Aktifkan Hak Veto untuk mengubah manual.</small>
+                                <small class="text-muted mt-2 d-block"><i class="bi bi-info-circle"></i> Sistem otomatis mendeteksi prioritas dari Tensi dan Keluhan. Aktifkan Hak Veto untuk mengubah manual.</small>
                             </div>
                         </div>
 
@@ -206,27 +206,25 @@
         {{-- Sidebar Info --}}
         <div class="col-md-4">
             <div class="card mb-3">
-                <div class="card-header"><i class="bi bi-info-circle me-1"></i> Cara Kerja RBR + TBS</div>
+                <div class="card-header"><i class="bi bi-info-circle me-1"></i> Keterangan Prioritas</div>
                 <div class="card-body small">
-                    <h6><i class="bi bi-cpu me-1"></i> Rule-Based Reasoning (RBR)</h6>
-                    <p class="mb-2">Sistem mencocokkan keluhan pasien dengan aturan prioritas:</p>
+                    <h6><i class="bi bi-diagram-3 me-1"></i> Rule-Based Reasoning (RBR)</h6>
+                    <p class="mb-2">Sistem mencocokkan keluhan pasien dengan aturan prioritas secara otomatis:</p>
                     <ul class="list-unstyled mb-3">
-                        <li class="mb-1">🔴 <strong>Gawat</strong>: Pendarahan, kejang, pecah ketuban</li>
-                        <li class="mb-1">🟡 <strong>Mendesak</strong>: Demam tinggi, nyeri hebat, TD tidak normal</li>
-                        <li>🟢 <strong>Biasa</strong>: Kontrol rutin, konsultasi, imunisasi</li>
+                        <li class="mb-1">🔴 <strong>Gawat Darurat</strong>: Perdarahan, eklampsia, ketuban pecah dini, gawat janin, retensio plasenta</li>
+                        <li class="mb-1">🟡 <strong>Mendesak</strong>: Kontraksi teratur, hipertensi, hiperemesis, gerakan janin berkurang</li>
+                        <li>🟢 <strong>Biasa</strong>: ANC rutin, imunisasi, KB, konsultasi, pemeriksaan nifas</li>
                     </ul>
                     <hr>
                     <h6><i class="bi bi-clock me-1"></i> Time-Based Scheduling (TBS)</h6>
-                    <p class="mb-0">Estimasi waktu dihitung dari jumlah pasien aktif × durasi layanan per prioritas. Pasien
-                        gawat disisipkan ke depan antrian.</p>
+                    <p class="mb-0">Estimasi waktu dihitung berdasarkan jumlah pasien aktif × durasi layanan per prioritas. Pasien gawat darurat otomatis disisipkan ke urutan terdepan.</p>
                 </div>
             </div>
 
-            <div class="card border-warning">
+            <div class="card">
                 <div class="card-body">
-                    <h6 class="text-warning"><i class="bi bi-exclamation-triangle me-1"></i> Penting</h6>
-                    <p class="small mb-0">Bidan tetap dapat memilih prioritas secara manual. Saran otomatis dari keluhan
-                        hanya sebagai bantuan (decision support).</p>
+                    <h6><i class="bi bi-exclamation-triangle me-1"></i> Catatan</h6>
+                    <p class="small mb-0">Bidan tetap dapat memilih prioritas secara manual melalui fitur <strong>Hak Veto</strong>. Rekomendasi otomatis bersifat sebagai alat bantu pengambilan keputusan (<em>decision support</em>).</p>
                 </div>
             </div>
         </div>
@@ -367,7 +365,7 @@
                             const colors = { 'GAWAT': 'danger', 'MENDESAK': 'warning', 'BIASA': 'success' };
                             const badge = colors[data.kode] || 'secondary';
                             document.getElementById('rbrSuggestion').innerHTML =
-                                `<span class="badge bg-${badge}"><i class="bi bi-robot"></i> Keputusan Sistem: ${data.nama}</span>`;
+                                `<span class="badge bg-${badge}"><i class="bi bi-check2-circle"></i> Rekomendasi Sistem: ${data.nama}</span>`;
 
                             // Auto-select prioritas
                             const radio = document.getElementById('prio_' + data.prioritas_id);

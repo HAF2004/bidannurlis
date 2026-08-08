@@ -20,8 +20,8 @@ class QueueSeeder extends Seeder
             'warna' => 'merah',
             'urutan' => 1,
             'estimasi_waktu' => 30,
-            'gejala' => 'persalinan mulas,pendarahan,pengen ngeden',
-            'deskripsi' => 'Kondisi gawat darurat (15-30 menit + rujukan). Pasien didahulukan.',
+            'gejala' => 'perdarahan,kejang,eklampsia,pre-eklampsia berat,ketuban pecah dini,tali pusat menumbung,retensio plasenta,syok,tidak sadar,sesak napas berat,partus lama,gawat janin,prolaps tali pusat,atonia uteri',
+            'deskripsi' => 'Kondisi kegawatdaruratan obstetri/neonatal yang memerlukan penanganan segera atau rujukan.',
         ]);
 
         Prioritas::updateOrCreate(['kode' => 'MENDESAK'], [
@@ -30,8 +30,8 @@ class QueueSeeder extends Seeder
             'warna' => 'kuning',
             'urutan' => 2,
             'estimasi_waktu' => 10,
-            'gejala' => 'perut kenceng,perut sakit bagian bawah,mual muntah parah,keluar air,hipertensi,darah tinggi',
-            'deskripsi' => 'Kondisi mendesak (rata-rata 10 menit).',
+            'gejala' => 'kontraksi teratur,his teratur,mulas teratur,demam tinggi,nyeri perut hebat,tekanan darah tinggi,hipertensi,mual muntah hebat,hiperemesis,keluar darah,flek,keputihan berbau,gerakan janin berkurang,bengkak kaki tangan wajah,sakit kepala hebat,pandangan kabur',
+            'deskripsi' => 'Kondisi yang memerlukan penanganan segera namun bukan kegawatdaruratan.',
         ]);
 
         Prioritas::updateOrCreate(['kode' => 'BIASA'], [
@@ -40,8 +40,8 @@ class QueueSeeder extends Seeder
             'warna' => 'hijau',
             'urutan' => 3,
             'estimasi_waktu' => 10,
-            'gejala' => 'kb,berobat umum,periksa hamil,imunisasi,periksa perkembangan anak',
-            'deskripsi' => 'Kunjungan rutin (rata-rata 10 menit).',
+            'gejala' => 'kontrol kehamilan,pemeriksaan rutin,ANC,imunisasi,KB,konsultasi,periksa nifas,periksa bayi,tumbuh kembang anak,suntik KB,pasang IUD,pil KB,berobat umum,batuk pilek,demam ringan,cek laboratorium',
+            'deskripsi' => 'Kunjungan rutin, pemeriksaan berkala, atau konsultasi umum.',
         ]);
 
         // ═══════════════════════════════════════════

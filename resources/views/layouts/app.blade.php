@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Kartu Ibu') - Sistem Pembukuan Bidan</title>
+    <title>@yield('title', 'SIMAR')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #4f46e5;
-            --primary-dark: #3730a3;
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
             --secondary-color: #f8fafc;
-            --accent-color: #10b981;
+            --accent-color: #059669;
             --sidebar-width: 260px;
         }
 
@@ -25,7 +25,7 @@
 
         .sidebar {
             width: var(--sidebar-width);
-            background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: #1e293b;
             min-height: 100vh;
             position: fixed;
             left: 0;
@@ -89,9 +89,9 @@
         }
 
         .card {
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .card-header {
@@ -101,26 +101,8 @@
             font-weight: 600;
         }
 
-        .stat-card {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            color: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-        }
 
-        .stat-card.accent {
-            background: linear-gradient(135deg, var(--accent-color) 0%, #059669 100%);
-        }
 
-        .stat-card .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
-        .stat-card .stat-label {
-            opacity: 0.9;
-            font-size: 0.875rem;
-        }
 
         .btn-primary {
             background: var(--primary-color);
@@ -168,8 +150,8 @@
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="brand">
-            <h4><i class="bi bi-heart-pulse me-2"></i>Kartu Ibu</h4>
-            <small>Sistem Pembukuan Bidan</small>
+            <h4><i class="bi bi-heart-pulse me-2"></i>SIMAR</h4>
+            <small>Sistem Informasi Manajemen Antrian dan Rekam Medis</small>
         </div>
         <nav class="nav flex-column mt-3">
             <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
@@ -186,9 +168,8 @@
                 href="{{ route('antrian.riwayat') }}">
                 <i class="bi bi-clock-history"></i> Riwayat Antrian
             </a>
-            <a class="nav-link" href="{{ route('antrian.monitor') }}" target="_blank">
-                <i class="bi bi-tv"></i> Monitor Antrian
-            </a>
+
+
 
             <div class="px-3 mt-3 mb-1"><small class="text-white-50 text-uppercase"
                     style="font-size: 0.65rem; letter-spacing: 0.1em;">Layanan Umum</small></div>
